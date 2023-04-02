@@ -1,0 +1,26 @@
+name: golangci-lint-woocommerce
+on: [pull_request]
+jobs:
+  golangci-for-woocommerce-sdk:
+    name: woocommerce-golangci-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.17.8'
+      - uses: actions/checkout@v3
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
+          version: v1.42
+
+          # Optional: working directory, useful for monorepo
+          working-directory: ./
+
+          # Optional: golangci-lint command line arguments.
+          args: --config=../.golangci.yml
+
+          # Optional: show only new issues if it's a pull request. The default value is `false`.
+          # only-new-issues: true
