@@ -24,7 +24,7 @@ func main() {
 	// we need to authenticate the application
 	_ = api.Auth("", "")
 
-	//products, _ := api.SearchProducts(context.Background(), model.SearchProductsRequest{
+	//products, _ := api.ListAllProducts(context.Background(), model.SearchProductsRequest{
 	//	Page:    1,
 	//	PerPage: 10,
 	//Order:          "",
@@ -58,6 +58,25 @@ func main() {
 	//})
 	//fmt.Println("this is the length of the products ---> ", len(products))
 
-	//product, _ := api.GetProductByID(context.Background(), "13")
+	//product, _ := api.RetrieveAProduct(context.Background(), "13")
 	//fmt.Println("product is --->", product)
+
+	//categories, _ := api.ListAllCategories(context.Background(), model.SearchCategoriesRequest{
+	//	Page:    1,
+	//	PerPage: 10,
+	//	//Order:     "",
+	//	//OrderBy:   "",
+	//	//Context:   "",
+	//	//Search:    "",
+	//	//Exclude:   nil,
+	//	//Include:   nil,
+	//	//Parent:    0,
+	//	//Product:   0,
+	//	//HideEmpty: false,
+	//	//Slug:      "",
+	//})
+	//fmt.Println("categories --->", categories)
+
+	//category, _ := api.RetrieveACategory(context.Background(), "18")
+	//fmt.Println("category is --->", category)
 }
