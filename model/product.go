@@ -104,7 +104,11 @@ type (
 			Name string `mapstructure:"name" json:"name"`
 			Slug string `mapstructure:"slug" json:"slug"`
 		} `mapstructure:"categories" json:"categories"`
-		Tags   []int `mapstructure:"tags" json:"tags"`
+		Tags []struct {
+			ID   int    `mapstructure:"id" json:"id"`
+			Name string `mapstructure:"name" json:"name"`
+			Slug string `mapstructure:"slug" json:"slug"`
+		} `mapstructure:"tags" json:"tags"`
 		Images []struct {
 			ID              int    `mapstructure:"id" json:"id"`
 			DateCreated     string `mapstructure:"date_created" json:"date_created"`
