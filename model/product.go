@@ -16,25 +16,25 @@ type (
 		ModifiedAfter  string      `url:"modified_after,omitempty" json:"modified_after"`
 		ModifiedBefore string      `url:"modified_before,omitempty" json:"modified_before"`
 		DateAreGmt     bool        `url:"date_are_gmt,omitempty" json:"date_are_gmt"`
+		Featured       bool        `url:"featured,omitempty" json:"featured"`
+		OnSale         bool        `url:"on_sale,omitempty" json:"on_sale"`
 		Exclude        []string    `url:"exclude,omitempty" json:"exclude"`
 		Include        []string    `url:"include,omitempty" json:"include"`
 		Parent         []string    `url:"parent,omitempty" json:"parent"`
 		ParentExclude  []string    `url:"parent_exclude,omitempty" json:"parent_exclude"`
-		Slug           string      `url:"slug,omitempty" json:"slug"`
 		Status         Status      `url:"status,omitempty" json:"status"`
 		Type           ProductType `url:"type,omitempty" json:"type"`
 		SKU            string      `url:"sku,omitempty" json:"sku"`
-		Featured       string      `url:"featured,omitempty" json:"featured"`
 		Category       string      `url:"category,omitempty" json:"category"`
 		Tag            string      `url:"tag,omitempty" json:"tag"`
 		ShippingClass  string      `url:"shipping_class,omitempty" json:"shipping_class"`
 		Attribute      string      `url:"attribute,omitempty" json:"attribute"`
 		AttributeTerm  string      `url:"attribute_term,omitempty" json:"attribute_term"`
 		TaxClass       string      `url:"tax_class,omitempty" json:"tax_class"`
-		OnSale         string      `url:"on_sale,omitempty" json:"on_sale"`
 		MinPrice       string      `url:"min_price,omitempty" json:"min_price"`
 		MaxPrice       string      `url:"max_price,omitempty" json:"max_price"`
 		StockStatus    string      `url:"stock_status,omitempty" json:"stock_status"`
+		Slug           string      `url:"slug,omitempty" json:"slug"`
 	}
 
 	// Product schema
