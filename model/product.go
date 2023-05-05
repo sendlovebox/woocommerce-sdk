@@ -57,10 +57,10 @@ type (
 		Price             string        `mapstructure:"price" json:"price"`
 		RegularPrice      string        `mapstructure:"regular_price" json:"regular_price"`
 		SalePrice         string        `mapstructure:"sale_price" json:"sale_price"`
-		DateOnSaleFrom    interface{}   `mapstructure:"date_on_sale_from" json:"date_on_sale_from"`
-		DateOnSaleFromGmt interface{}   `mapstructure:"date_on_sale_from_gmt" json:"date_on_sale_from_gmt"`
-		DateOnSaleTo      interface{}   `mapstructure:"date_on_sale_to" json:"date_on_sale_to"`
-		DateOnSaleToGmt   interface{}   `mapstructure:"date_on_sale_to_gmt" json:"date_on_sale_to_gmt"`
+		DateOnSaleFrom    string        `mapstructure:"date_on_sale_from" json:"date_on_sale_from"`
+		DateOnSaleFromGmt string        `mapstructure:"date_on_sale_from_gmt" json:"date_on_sale_from_gmt"`
+		DateOnSaleTo      string        `mapstructure:"date_on_sale_to" json:"date_on_sale_to"`
+		DateOnSaleToGmt   string        `mapstructure:"date_on_sale_to_gmt" json:"date_on_sale_to_gmt"`
 		PriceHTML         string        `mapstructure:"price_html" json:"price_html"`
 		OnSale            bool          `mapstructure:"on_sale" json:"on_sale"`
 		Purchasable       bool          `mapstructure:"purchasable" json:"purchasable"`
@@ -87,24 +87,24 @@ type (
 			Width  string `mapstructure:"" json:"width"`
 			Height string `mapstructure:"" json:"height"`
 		} `mapstructure:"dimensions" json:"dimensions"`
-		ShippingRequired bool          `mapstructure:"shipping_required" json:"shipping_required"`
-		ShippingTaxable  bool          `mapstructure:"shipping_taxable" json:"shipping_taxable"`
-		ShippingClass    string        `mapstructure:"shipping_class" json:"shipping_class"`
-		ShippingClassId  int           `mapstructure:"shipping_class_id" json:"shipping_class_id"`
-		ReviewsAllowed   bool          `mapstructure:"reviews_allowed" json:"reviews_allowed"`
-		AverageRating    string        `mapstructure:"average_rating" json:"average_rating"`
-		RatingCount      int           `mapstructure:"rating_count" json:"rating_count"`
-		RelatedIDs       []int         `mapstructure:"related_ids" json:"related_ids"`
-		UpsellIDs        []interface{} `mapstructure:"upsell_ids" json:"upsell_ids"`
-		CrossSellIDs     []interface{} `mapstructure:"cross_sell_ids" json:"cross_sell_ids"`
-		ParentID         int           `mapstructure:"parent_id" json:"parent_id"`
-		PurchaseNote     string        `mapstructure:"purchase_note" json:"purchase_note"`
+		ShippingRequired bool   `mapstructure:"shipping_required" json:"shipping_required"`
+		ShippingTaxable  bool   `mapstructure:"shipping_taxable" json:"shipping_taxable"`
+		ShippingClass    string `mapstructure:"shipping_class" json:"shipping_class"`
+		ShippingClassId  int    `mapstructure:"shipping_class_id" json:"shipping_class_id"`
+		ReviewsAllowed   bool   `mapstructure:"reviews_allowed" json:"reviews_allowed"`
+		AverageRating    string `mapstructure:"average_rating" json:"average_rating"`
+		RatingCount      int    `mapstructure:"rating_count" json:"rating_count"`
+		RelatedIDs       []int  `mapstructure:"related_ids" json:"related_ids"`
+		UpsellIDs        []int  `mapstructure:"upsell_ids" json:"upsell_ids"`
+		CrossSellIDs     []int  `mapstructure:"cross_sell_ids" json:"cross_sell_ids"`
+		ParentID         int    `mapstructure:"parent_id" json:"parent_id"`
+		PurchaseNote     string `mapstructure:"purchase_note" json:"purchase_note"`
 		Categories       []struct {
 			ID   int    `mapstructure:"id" json:"id"`
 			Name string `mapstructure:"name" json:"name"`
 			Slug string `mapstructure:"slug" json:"slug"`
 		} `mapstructure:"categories" json:"categories"`
-		Tags   []interface{} `mapstructure:"tags" json:"tags"`
+		Tags   []int `mapstructure:"tags" json:"tags"`
 		Images []struct {
 			ID              int    `mapstructure:"id" json:"id"`
 			DateCreated     string `mapstructure:"date_created" json:"date_created"`
