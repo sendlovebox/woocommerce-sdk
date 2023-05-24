@@ -26,7 +26,7 @@ type (
 		Parent      int    `mapstructure:"parent" json:"parent"`
 		Description string `mapstructure:"description" json:"description"`
 		Display     string `mapstructure:"display" json:"display"`
-		Image       []struct {
+		Image       struct {
 			ID              int    `mapstructure:"id" json:"id"`
 			DateCreated     string `mapstructure:"date_created" json:"date_created"`
 			DateCreatedGmt  string `mapstructure:"date_created_gmt" json:"date_created_gmt"`
