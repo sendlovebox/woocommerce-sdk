@@ -61,6 +61,24 @@ func main() {
 	//product, _ := api.RetrieveAProduct(context.Background(), "13")
 	//fmt.Println("product is --->", product)
 
+	//tags, _ := api.ListAllProductTags(context.Background(), model.SearchTagsRequest{
+	//	PaginationRequest: model.PaginationRequest{
+	//		Page:    2,
+	//		PerPage: 2,
+	//		Offset:  0,
+	//		Order:   "desc",
+	//		OrderBy: "count",
+	//	},
+	//	Context:   "",
+	//	Search:    "",
+	//	Exclude:   nil,
+	//	Include:   nil,
+	//	HideEmpty: false,
+	//	Product:   0,
+	//	Slug:      "",
+	//})
+	//fmt.Println("product tags are --->", tags)
+
 	//categories, _ := api.ListAllCategories(context.Background(), model.SearchCategoriesRequest{
 	//	Page:    1,
 	//	PerPage: 10,

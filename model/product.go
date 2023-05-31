@@ -3,11 +3,7 @@ package model
 type (
 	// SearchProductsRequest schema to search or filter products
 	SearchProductsRequest struct {
-		Page    int       `url:"page,omitempty" json:"page"`
-		PerPage int       `url:"per_page,omitempty" json:"per_page"`
-		Offset  int       `url:"offset,omitempty" json:"offset"`
-		Order   OrderType `url:"order,omitempty" json:"order"`
-		OrderBy OrderBy   `url:"order_by,omitempty" json:"order_by"`
+		PaginationRequest
 
 		Context        string      `url:"context,omitempty" json:"context"`
 		Search         string      `url:"search,omitempty" json:"search"`
@@ -109,16 +105,7 @@ type (
 			Name string `mapstructure:"name" json:"name"`
 			Slug string `mapstructure:"slug" json:"slug"`
 		} `mapstructure:"tags" json:"tags"`
-		Images []struct {
-			ID              int    `mapstructure:"id" json:"id"`
-			DateCreated     string `mapstructure:"date_created" json:"date_created"`
-			DateCreatedGmt  string `mapstructure:"date_created_gmt" json:"date_created_gmt"`
-			DateModified    string `mapstructure:"date_modified" json:"date_modified"`
-			DateModifiedGmt string `mapstructure:"date_modified_gmt" json:"date_modified_gmt"`
-			Src             string `mapstructure:"src" json:"src"`
-			Name            string `mapstructure:"name" json:"name"`
-			Alt             string `mapstructure:"alt" json:"alt"`
-		} `mapstructure:"images" json:"images"`
+		Images     []Image `mapstructure:"images" json:"images"`
 		Attributes []struct {
 			ID        int      `mapstructure:"id" json:"id"`
 			Name      string   `mapstructure:"name" json:"name"`
@@ -140,5 +127,55 @@ type (
 				Href string `mapstructure:"href" json:"href"`
 			} `mapstructure:"collection" json:"collection"`
 		} `mapstructure:"_links" json:"_links"`
+	}
+
+	// Image schema
+	Image struct {
+		ID              int    `mapstructure:"id" json:"id"`
+		DateCreated     string `mapstructure:"date_created" json:"date_created"`
+		DateCreatedGmt  string `mapstructure:"date_created_gmt" json:"date_created_gmt"`
+		DateModified    string `mapstructure:"date_modified" json:"date_modified"`
+		DateModifiedGmt string `mapstructure:"date_modified_gmt" json:"date_modified_gmt"`
+		Src             string `mapstructure:"src" json:"src"`
+		Name            string `mapstructure:"name" json:"name"`
+		Alt             string `mapstructure:"alt" json:"alt"`
+	}
+
+	// SearchTagsRequest schema for request to search for tags
+	SearchTagsRequest struct {
+		PaginationRequest
+		Context   string   `url:"context,omitempty" json:"context"`
+		Search    string   `url:"search,omitempty" json:"search"`
+		Exclude   []string `url:"exclude,omitempty" json:"exclude"`
+		Include   []string `url:"include,omitempty" json:"include"`
+		HideEmpty bool     `url:"hide_empty,omitempty" json:"hide_empty"`
+		Product   int      `url:"product,omitempty" json:"product"`
+		Slug      string   `url:"slug,omitempty" json:"slug"`
+	}
+
+	// ProductTag schema for product tags
+	ProductTag struct {
+		ID          int    `json:"id"`
+		Name        string `json:"name"`
+		Slug        string `json:"slug"`
+		Description string `json:"description"`
+		Count       int    `json:"count"`
+		Links       struct {
+			Self []struct {
+				Href string `json:"href"`
+			} `json:"self"`
+			Collection []struct {
+				Href string `json:"href"`
+			} `json:"collection"`
+		} `json:"_links"`
+	}
+
+	// PaginationRequest schema for all requests
+	PaginationRequest struct {
+		Page    int       `url:"page,omitempty" json:"page,omitempty"`
+		PerPage int       `url:"per_page,omitempty" json:"per_page,omitempty"`
+		Offset  int       `url:"offset,omitempty" json:"offset,omitempty"`
+		Order   OrderType `url:"order,omitempty" json:"order,omitempty"`
+		OrderBy OrderBy   `url:"order_by,omitempty" json:"order_by,omitempty"`
 	}
 )
