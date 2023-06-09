@@ -86,7 +86,7 @@ type (
 		ShippingRequired bool   `mapstructure:"shipping_required" json:"shipping_required"`
 		ShippingTaxable  bool   `mapstructure:"shipping_taxable" json:"shipping_taxable"`
 		ShippingClass    string `mapstructure:"shipping_class" json:"shipping_class"`
-		ShippingClassId  int    `mapstructure:"shipping_class_id" json:"shipping_class_id"`
+		ShippingClassID  int    `mapstructure:"shipping_class_id" json:"shipping_class_id"`
 		ReviewsAllowed   bool   `mapstructure:"reviews_allowed" json:"reviews_allowed"`
 		AverageRating    string `mapstructure:"average_rating" json:"average_rating"`
 		RatingCount      int    `mapstructure:"rating_count" json:"rating_count"`
