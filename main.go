@@ -97,4 +97,38 @@ func main() {
 
 	//category, _ := api.RetrieveACategory(context.Background(), "18")
 	//fmt.Println("category is --->", category)
+
+	//customer, _ := api.CreateACustomer(context.Background(), model.CreateCustomerRequest{
+	//	Email:     "abcde@ninja.com",
+	//	FirstName: "ABCDE",
+	//	LastName:  "NINJA",
+	//	Username:  "abcde-ninja",
+	//	Billing: model.Address{
+	//		//FirstName: "",
+	//		//LastName:  "",
+	//		//Company:   "",
+	//		//Address1:  "",
+	//		//Address2:  "",
+	//		//City:      "",
+	//		//State:     "",
+	//		//Postcode:  "",
+	//		//Country:   "",
+	//		Email: "abcde@ninja.com",
+	//		//Phone:     "",
+	//	},
+	//	Shipping: model.Address{
+	//		//FirstName: "",
+	//		//LastName:  "",
+	//		//Company:   "",
+	//		//Address1:  "",
+	//		//Address2:  "",
+	//		//City:      "",
+	//		//State:     "",
+	//		//Postcode:  "",
+	//		//Country:   "",
+	//		Email: "abcde@ninja.com",
+	//		//Phone:     "",
+	//	},
+	//})
+	//fmt.Println("customer is --->", customer)
 }
