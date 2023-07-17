@@ -23,15 +23,15 @@ type (
 		Total              string      `json:"total"`
 		TotalTax           string      `json:"total_tax"`
 		PricesIncludeTax   bool        `json:"prices_include_tax"`
-		CustomerId         int         `json:"customer_id"`
-		CustomerIpAddress  string      `json:"customer_ip_address"`
+		CustomerID         int         `json:"customer_id"`
+		CustomerIPAddress  string      `json:"customer_ip_address"`
 		CustomerUserAgent  string      `json:"customer_user_agent"`
 		CustomerNote       string      `json:"customer_note"`
 		Billing            Address     `json:"billing"`
 		Shipping           Address     `json:"shipping"`
 		PaymentMethod      string      `json:"payment_method"`
 		PaymentMethodTitle string      `json:"payment_method_title"`
-		TransactionId      string      `json:"transaction_id"`
+		TransactionID      string      `json:"transaction_id"`
 		DatePaid           string      `json:"date_paid"`
 		DatePaidGmt        string      `json:"date_paid_gmt"`
 		DateCompleted      interface{} `json:"date_completed"`

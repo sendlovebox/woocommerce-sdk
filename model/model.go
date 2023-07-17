@@ -1,3 +1,4 @@
+// Package model contains all the models
 package model
 
 type (

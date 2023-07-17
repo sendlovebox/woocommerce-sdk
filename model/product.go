@@ -66,7 +66,7 @@ type (
 		Downloads         []interface{} `mapstructure:"downloads" json:"downloads"`
 		DownloadLimit     int           `mapstructure:"download_limit" json:"download_limit"`
 		DownloadExpiry    int           `mapstructure:"download_expiry" json:"download_expiry"`
-		ExternalUrl       string        `mapstructure:"external_url" json:"external_url"`
+		ExternalURL       string        `mapstructure:"external_url" json:"external_url"`
 		ButtonText        string        `mapstructure:"button_text" json:"button_text"`
 		TaxStatus         string        `mapstructure:"tax_status" json:"tax_status"`
 		TaxClass          string        `mapstructure:"tax_class" json:"tax_class"`
