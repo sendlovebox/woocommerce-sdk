@@ -24,6 +24,10 @@ type RemoteCalls interface {
 
 	ListAllCategories(ctx context.Context, request model.SearchCategoriesRequest) ([]*model.Category, error)
 	RetrieveACategory(ctx context.Context, id string) (model.Category, error)
+
+	CreateACustomer(ctx context.Context, request model.CreateCustomerRequest) (*model.Customer, error)
+
+	CreateAnOrder(ctx context.Context, request model.CreateOrderRequest) (*model.Order, error)
 }
 
 // Call object
@@ -42,7 +46,6 @@ func New(z *zerolog.Logger, c *resty.Client, baseURL string) RemoteCalls {
 		logger:  z.With().Str("sdk", "woocommerce").Logger(),
 		baseURL: baseURL,
 	}
-	//c.SetBaseURL(baseURL)
 	return RemoteCalls(call)
 }
 

@@ -35,8 +35,6 @@ func (c *Call) ListAllCategories(ctx context.Context, request model.SearchCatego
 		SetResult(&response).
 		SetError(errorRes).
 		SetQueryParamsFromValues(queryParams).
-		SetHeader("Content-Type", "application/json").
-		SetHeader("Accept", "application/json").
 		SetContext(ctx).
 		Get(endpoint)
 
@@ -73,8 +71,6 @@ func (c *Call) RetrieveACategory(ctx context.Context, id string) (model.Category
 	resp, err := c.client.R().
 		SetResult(&response).
 		SetError(errorRes).
-		SetHeader("Content-Type", "application/json").
-		SetHeader("Accept", "application/json").
 		SetContext(ctx).
 		Get(endpoint)
 

@@ -1,3 +1,4 @@
+// Package model contains all the models
 package model
 
 type (
@@ -22,11 +23,23 @@ type (
 			Status int `mapstructure:"status" json:"status"`
 		} `mapstructure:"data" json:"data"`
 	}
+
+	// Links woocommerce schema
+	Links struct {
+		Self []struct {
+			Href string `json:"href"`
+		} `json:"self"`
+		Collection []struct {
+			Href string `json:"href"`
+		} `json:"collection"`
+	}
 )
 
 const (
 	// LogStrRequest log string key
 	LogStrRequest = "request"
+	// LogStrResponse log string key
+	LogStrResponse = "response"
 	// LogStrKeyEndpoint log endpoint name value
 	LogStrKeyEndpoint = "endpoint"
 

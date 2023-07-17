@@ -49,6 +49,36 @@ func (mr *MockRemoteCallsMockRecorder) Auth(customerKey, customerSecret interfac
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Auth", reflect.TypeOf((*MockRemoteCalls)(nil).Auth), customerKey, customerSecret)
 }
 
+// CreateACustomer mocks base method.
+func (m *MockRemoteCalls) CreateACustomer(ctx context.Context, request model.CreateCustomerRequest) (*model.Customer, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateACustomer", ctx, request)
+	ret0, _ := ret[0].(*model.Customer)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateACustomer indicates an expected call of CreateACustomer.
+func (mr *MockRemoteCallsMockRecorder) CreateACustomer(ctx, request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateACustomer", reflect.TypeOf((*MockRemoteCalls)(nil).CreateACustomer), ctx, request)
+}
+
+// CreateAnOrder mocks base method.
+func (m *MockRemoteCalls) CreateAnOrder(ctx context.Context, request model.CreateOrderRequest) (*model.Order, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateAnOrder", ctx, request)
+	ret0, _ := ret[0].(*model.Order)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// CreateAnOrder indicates an expected call of CreateAnOrder.
+func (mr *MockRemoteCallsMockRecorder) CreateAnOrder(ctx, request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAnOrder", reflect.TypeOf((*MockRemoteCalls)(nil).CreateAnOrder), ctx, request)
+}
+
 // ListAllCategories mocks base method.
 func (m *MockRemoteCalls) ListAllCategories(ctx context.Context, request model.SearchCategoriesRequest) ([]*model.Category, error) {
 	m.ctrl.T.Helper()
@@ -62,6 +92,21 @@ func (m *MockRemoteCalls) ListAllCategories(ctx context.Context, request model.S
 func (mr *MockRemoteCallsMockRecorder) ListAllCategories(ctx, request interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllCategories", reflect.TypeOf((*MockRemoteCalls)(nil).ListAllCategories), ctx, request)
+}
+
+// ListAllProductTags mocks base method.
+func (m *MockRemoteCalls) ListAllProductTags(ctx context.Context, request model.SearchTagsRequest) ([]*model.ProductTag, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListAllProductTags", ctx, request)
+	ret0, _ := ret[0].([]*model.ProductTag)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListAllProductTags indicates an expected call of ListAllProductTags.
+func (mr *MockRemoteCallsMockRecorder) ListAllProductTags(ctx, request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllProductTags", reflect.TypeOf((*MockRemoteCalls)(nil).ListAllProductTags), ctx, request)
 }
 
 // ListAllProducts mocks base method.
