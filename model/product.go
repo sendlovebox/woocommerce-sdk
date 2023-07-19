@@ -105,20 +105,13 @@ type (
 			Name string `mapstructure:"name" json:"name"`
 			Slug string `mapstructure:"slug" json:"slug"`
 		} `mapstructure:"tags" json:"tags"`
-		Images     []Image `mapstructure:"images" json:"images"`
-		Attributes []struct {
-			ID        int      `mapstructure:"id" json:"id"`
-			Name      string   `mapstructure:"name" json:"name"`
-			Position  int      `mapstructure:"position" json:"position"`
-			Visible   bool     `mapstructure:"visible" json:"visible"`
-			Variation bool     `mapstructure:"variation" json:"variation"`
-			Options   []string `mapstructure:"attributes" json:"options"`
-		} `mapstructure:"attributes" json:"attributes"`
-		DefaultAttributes []interface{} `mapstructure:"default_attributes" json:"default_attributes"`
-		Variations        []interface{} `mapstructure:"variations" json:"variations"`
-		GroupedProducts   []interface{} `mapstructure:"grouped_products" json:"grouped_products"`
-		MenuOrder         int           `mapstructure:"menu_order" json:"menu_order"`
-		MetaData          []interface{} `mapstructure:"meta_data" json:"meta_data"`
+		Images            []Image            `mapstructure:"images" json:"images"`
+		Attributes        []ProductAttribute `mapstructure:"attributes" json:"attributes"`
+		DefaultAttributes []interface{}      `mapstructure:"default_attributes" json:"default_attributes"`
+		Variations        []int              `mapstructure:"variations" json:"variations"`
+		GroupedProducts   []interface{}      `mapstructure:"grouped_products" json:"grouped_products"`
+		MenuOrder         int                `mapstructure:"menu_order" json:"menu_order"`
+		MetaData          []interface{}      `mapstructure:"meta_data" json:"meta_data"`
 		Links             struct {
 			Self []struct {
 				Href string `mapstructure:"href" json:"href"`
@@ -177,5 +170,15 @@ type (
 		Offset  int       `url:"offset,omitempty" json:"offset,omitempty"`
 		Order   OrderType `url:"order,omitempty" json:"order,omitempty"`
 		OrderBy OrderBy   `url:"order_by,omitempty" json:"order_by,omitempty"`
+	}
+
+	// ProductAttribute schema
+	ProductAttribute struct {
+		ID        int      `mapstructure:"id" json:"id"`
+		Name      string   `mapstructure:"name" json:"name"`
+		Position  int      `mapstructure:"position" json:"position"`
+		Visible   bool     `mapstructure:"visible" json:"visible"`
+		Variation bool     `mapstructure:"variation" json:"variation"`
+		Options   []string `mapstructure:"attributes" json:"options"`
 	}
 )
