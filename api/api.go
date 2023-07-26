@@ -30,6 +30,9 @@ type RemoteCalls interface {
 	CreateACustomer(ctx context.Context, request model.CreateCustomerRequest) (*model.Customer, error)
 
 	CreateAnOrder(ctx context.Context, request model.CreateOrderRequest) (*model.Order, error)
+	RetrieveAnOrder(ctx context.Context, orderID int) (*model.Order, error)
+	UpdateAnOrder(ctx context.Context, orderID int, request model.UpdateOrderRequest) (*model.Order, error)
+	DeleteAnOrder(ctx context.Context, orderID int, forceDelete bool) (*model.Order, error)
 }
 
 // Call object

@@ -53,23 +53,48 @@ type (
 
 	// CreateOrderRequest request payload to create a new order. Reference in https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#create-an-order
 	CreateOrderRequest struct {
-		CustomerID         int     `json:"customer_id,omitempty"`
-		PaymentMethod      string  `json:"payment_method,omitempty"`
-		PaymentMethodTitle string  `json:"payment_method_title,omitempty"`
-		TransactionID      string  `json:"transaction_id,omitempty"`
-		SetPaid            bool    `json:"set_paid"`
-		Billing            Address `json:"billing"`
-		Shipping           Address `json:"shipping"`
-		LineItems          []struct {
-			ProductID   int `json:"product_id"`
-			Quantity    int `json:"quantity"`
-			VariationID int `json:"variation_id,omitempty"`
-		} `json:"line_items"`
-		ShippingLines []struct {
-			MethodID    string `json:"method_id"`
-			MethodTitle string `json:"method_title"`
-			Total       string `json:"total"`
-		} `json:"shipping_lines"`
+		CustomerID         int                   `json:"customer_id,omitempty"`
+		PaymentMethod      string                `json:"payment_method,omitempty"`
+		PaymentMethodTitle string                `json:"payment_method_title,omitempty"`
+		TransactionID      string                `json:"transaction_id,omitempty"`
+		CustomerNote       string                `json:"customer_note,omitempty"`
+		SetPaid            bool                  `json:"set_paid,omitempty"`
+		Billing            Address               `json:"billing"`
+		Shipping           Address               `json:"shipping"`
+		FeeLines           []FeeLineRequest      `json:"fee_lines,omitempty"`
+		LineItems          []LineItemRequest     `json:"line_items"`
+		ShippingLines      []ShippingLineRequest `json:"shipping_lines"`
+	}
+
+	// UpdateOrderRequest request payload to update an existing order. Reference in https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#update-an-order
+	UpdateOrderRequest struct {
+		Status        string `json:"status,omitempty"`
+		CustomerID    int    `json:"customer_id,omitempty"`
+		CustomerNote  string `json:"customer_note,omitempty"`
+		TransactionID string `json:"transaction_id,omitempty"`
+		SetPaid       bool   `json:"set_paid,omitempty"`
+	}
+
+	// FeeLineRequest struct
+	FeeLineRequest struct {
+		Name      string `json:"name,omitempty"`
+		TaxClass  string `json:"tax_class,omitempty"`
+		TaxStatus string `json:"tax_status,omitempty"`
+		Total     string `json:"total,omitempty"`
+	}
+
+	// LineItemRequest schema
+	LineItemRequest struct {
+		ProductID   int `json:"product_id"`
+		Quantity    int `json:"quantity"`
+		VariationID int `json:"variation_id,omitempty"`
+	}
+
+	// ShippingLineRequest schema
+	ShippingLineRequest struct {
+		MethodID    string `json:"method_id"`
+		MethodTitle string `json:"method_title"`
+		Total       string `json:"total"`
 	}
 
 	// Address schema
@@ -142,4 +167,9 @@ const (
 	ShippingMethodFlatRateID = "flat_rate"
 	// ShippingMethodFlatRateTitle string for title for flat rate shipping method type
 	ShippingMethodFlatRateTitle = "Flat Rate"
+
+	// PaymentMethodBankTransfer string representation of the bank transfer
+	PaymentMethodBankTransfer = "bacs"
+	// PaymentMethodTitleBankTransfer  string representation of the bank transfer title
+	PaymentMethodTitleBankTransfer = "Direct Bank Transfer"
 )
