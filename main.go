@@ -67,7 +67,7 @@ func main() {
 	//product, _ := api.RetrieveAProduct(context.Background(), "38")
 	//fmt.Println("product is --->", product)
 	//
-	//productVariations, _ := api.RetrieveProductVariations(context.TODO(), "38", model.SearchProductVariationsRequest{
+	//productVariations, _ := api.RetrieveProductVariations(context.Background(), "38", model.SearchProductVariationsRequest{
 	//	PaginationRequest: model.PaginationRequest{
 	//		Page:    1,
 	//		PerPage: 100,
