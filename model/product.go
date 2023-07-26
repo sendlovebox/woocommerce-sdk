@@ -49,7 +49,7 @@ type (
 		CatalogVisibility string        `mapstructure:"catalog_visibility" json:"catalog_visibility"`
 		Description       string        `mapstructure:"description" json:"description"`
 		ShortDescription  string        `mapstructure:"short_description" json:"short_description"`
-		Sku               string        `mapstructure:"sku" json:"sku"`
+		SKU               string        `mapstructure:"sku" json:"sku"`
 		Price             string        `mapstructure:"price" json:"price"`
 		RegularPrice      string        `mapstructure:"regular_price" json:"regular_price"`
 		SalePrice         string        `mapstructure:"sale_price" json:"sale_price"`
@@ -122,6 +122,64 @@ type (
 		} `mapstructure:"_links" json:"_links"`
 	}
 
+	// ProductVariation schema
+	ProductVariation struct {
+		ID                int           `json:"id"`
+		DateCreated       string        `json:"date_created"`
+		DateCreatedGmt    string        `json:"date_created_gmt"`
+		DateModified      string        `json:"date_modified"`
+		DateModifiedGmt   string        `json:"date_modified_gmt"`
+		Description       string        `json:"description"`
+		Permalink         string        `json:"permalink"`
+		SKU               string        `json:"sku"`
+		Price             string        `json:"price"`
+		RegularPrice      string        `json:"regular_price"`
+		SalePrice         string        `json:"sale_price"`
+		DateOnSaleFrom    interface{}   `json:"date_on_sale_from"`
+		DateOnSaleFromGmt interface{}   `json:"date_on_sale_from_gmt"`
+		DateOnSaleTo      interface{}   `json:"date_on_sale_to"`
+		DateOnSaleToGmt   interface{}   `json:"date_on_sale_to_gmt"`
+		OnSale            bool          `json:"on_sale"`
+		Status            string        `json:"status"`
+		Purchasable       bool          `json:"purchasable"`
+		Virtual           bool          `json:"virtual"`
+		Downloadable      bool          `json:"downloadable"`
+		Downloads         []interface{} `json:"downloads"`
+		DownloadLimit     int           `json:"download_limit"`
+		DownloadExpiry    int           `json:"download_expiry"`
+		TaxStatus         string        `json:"tax_status"`
+		TaxClass          string        `json:"tax_class"`
+		ManageStock       bool          `json:"manage_stock"`
+		StockQuantity     interface{}   `json:"stock_quantity"`
+		StockStatus       string        `json:"stock_status"`
+		Backorders        string        `json:"backorders"`
+		BackordersAllowed bool          `json:"backorders_allowed"`
+		BackOrdered       bool          `json:"backordered"`
+		Weight            string        `json:"weight"`
+		Dimensions        struct {
+			Length string `json:"length"`
+			Width  string `json:"width"`
+			Height string `json:"height"`
+		} `json:"dimensions"`
+		ShippingClass   string             `json:"shipping_class"`
+		ShippingClassID int                `json:"shipping_class_id"`
+		Image           Image              `json:"image"`
+		Attributes      []ProductAttribute `json:"attributes"`
+		MenuOrder       int                `json:"menu_order"`
+		MetaData        []interface{}      `json:"meta_data"`
+		Links           struct {
+			Self []struct {
+				Href string `json:"href"`
+			} `json:"self"`
+			Collection []struct {
+				Href string `json:"href"`
+			} `json:"collection"`
+			Up []struct {
+				Href string `json:"href"`
+			} `json:"up"`
+		} `json:"_links"`
+	}
+
 	// Image schema
 	Image struct {
 		ID              int    `mapstructure:"id" json:"id"`
@@ -180,5 +238,27 @@ type (
 		Visible   bool     `mapstructure:"visible" json:"visible"`
 		Variation bool     `mapstructure:"variation" json:"variation"`
 		Options   []string `mapstructure:"attributes" json:"options"`
+	}
+
+	// SearchProductVariationsRequest schema to search for product variations
+	SearchProductVariationsRequest struct {
+		PaginationRequest
+
+		Context       string   `url:"context,omitempty" json:"context"`
+		Search        string   `url:"search,omitempty" json:"search"`
+		After         string   `url:"after,omitempty" json:"after"`
+		Before        string   `url:"before,omitempty" json:"before"`
+		OnSale        bool     `url:"on_sale,omitempty" json:"on_sale"`
+		Exclude       []string `url:"exclude,omitempty" json:"exclude"`
+		Include       []string `url:"include,omitempty" json:"include"`
+		Parent        []string `url:"parent,omitempty" json:"parent"`
+		ParentExclude []string `url:"parent_exclude,omitempty" json:"parent_exclude"`
+		Status        Status   `url:"status,omitempty" json:"status"`
+		SKU           string   `url:"sku,omitempty" json:"sku"`
+		TaxClass      string   `url:"tax_class,omitempty" json:"tax_class"`
+		MinPrice      string   `url:"min_price,omitempty" json:"min_price"`
+		MaxPrice      string   `url:"max_price,omitempty" json:"max_price"`
+		StockStatus   string   `url:"stock_status,omitempty" json:"stock_status"`
+		Slug          string   `url:"slug,omitempty" json:"slug"`
 	}
 )

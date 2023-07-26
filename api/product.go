@@ -91,6 +91,19 @@ func (c *Call) RetrieveAProduct(ctx context.Context, id string) (model.Product, 
 	return product, nil
 }
 
+// RetrieveProductVariations helps you to view product variations by a single product id
+func (c *Call) RetrieveProductVariations(ctx context.Context, productID string, request model.SearchProductVariationsRequest) ([]model.ProductVariation, error) {
+	response := &[]model.ProductVariation{}
+
+	path := fmt.Sprintf("/products/%s/variations", productID)
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return *response, nil
+}
+
 // ListAllProductTags helps you to view all the product tags.
 func (c *Call) ListAllProductTags(ctx context.Context, request model.SearchTagsRequest) ([]*model.ProductTag, error) {
 	endpoint := fmt.Sprintf("%s%s", c.baseURL, "/products/tags")

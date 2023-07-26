@@ -12,7 +12,7 @@ func (c *Call) CreateACustomer(ctx context.Context, request model.CreateCustomer
 	response := &model.Customer{}
 
 	path := "/customers"
-	err := c.makeRequest(ctx, http.MethodPost, path, request, response)
+	err := c.makeRequest(ctx, http.MethodPost, path, request, nil, response)
 	if err != nil {
 		return nil, err
 	}

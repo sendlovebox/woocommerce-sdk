@@ -5,15 +5,17 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 
 	"github.com/go-resty/resty/v2"
+	"github.com/google/go-querystring/query"
 	"github.com/mitchellh/mapstructure"
 
 	"github.com/sendlovebox/woocommerce-sdk/model"
 )
 
 // makeRequest is a super function that handles all requests to the woocommerce SDK
-func (c *Call) makeRequest(ctx context.Context, method, path string, body, expectedRes interface{}) error {
+func (c *Call) makeRequest(ctx context.Context, method, path string, body, params, expectedRes interface{}) error {
 	endpoint := fmt.Sprintf("%s%s", c.baseURL, path)
 
 	log := c.logger.With().Str("method", method).Str("endpoint", endpoint).Logger()
@@ -22,16 +24,28 @@ func (c *Call) makeRequest(ctx context.Context, method, path string, body, expec
 	defer log.Info().Msg("done...")
 
 	var (
-		err        error
-		res        *resty.Response
-		successRes interface{}
-		errorRes   model.ErrorPayload
+		err         error
+		res         *resty.Response
+		successRes  interface{}
+		queryParams url.Values
+		errorRes    model.ErrorPayload
 	)
 
 	client := c.client.R().
 		SetContext(ctx).
 		SetResult(&successRes).
 		SetError(&errorRes)
+
+	// set the query params if it is passed
+	if params != nil {
+		queryParams, err = query.Values(params)
+		if err != nil {
+			log.Info().Msg("invalid query params")
+			return model.ErrInvalidParams
+		}
+
+		client.SetQueryParamsFromValues(queryParams)
+	}
 
 	if body != nil {
 		client.SetBody(body)
