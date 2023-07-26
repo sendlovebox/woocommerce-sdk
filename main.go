@@ -161,4 +161,53 @@ func main() {
 	//	},
 	//})
 	//fmt.Println("customer is --->", customer)
+
+	//order, _ := api.CreateAnOrder(context.Background(), model.CreateOrderRequest{
+	//	CustomerID:         0,
+	//	PaymentMethod:      "bacs",
+	//	PaymentMethodTitle: "Direct Bank Transfer",
+	//	TransactionID:      "",
+	//	CustomerNote:       "this is the notes from the customer.",
+	//	SetPaid:            false,
+	//	Billing:            model.Address{
+	//		//Email: "abcde@ninja.com",
+	//	},
+	//	Shipping: model.Address{
+	//		//Email: "abcde@ninja.com",
+	//	},
+	//	FeeLines: []model.FeeLineRequest{
+	//		{
+	//			Name:  "our charge",
+	//			Total: "100.30",
+	//		},
+	//	},
+	//	LineItems: []model.LineItemRequest{
+	//		{
+	//			ProductID: 38,
+	//			Quantity:  1,
+	//		},
+	//	},
+	//	ShippingLines: []model.ShippingLineRequest{
+	//		{
+	//			MethodID:    "flat_rate",
+	//			MethodTitle: "Flat Rate",
+	//			Total:       "10.00",
+	//		},
+	//	},
+	//})
+	//
+	//fmt.Println("order is --->", order)
+
+	//order, _ := api.UpdateAnOrder(context.Background(), 85, model.UpdateOrderRequest{
+	//	//Status:        "",
+	//	//CustomerID:    0,
+	//	CustomerNote:  "oriyomifx has money die",
+	//	TransactionID: "some-random-id-here",
+	//	SetPaid:       true,
+	//})
+	//fmt.Println("order is --->", order)
+
+	//_, _ = api.DeleteAnOrder(context.Background(), 85)
+
+	//_, _ = api.RetrieveAnOrder(context.Background(), 85)
 }
