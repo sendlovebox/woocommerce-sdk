@@ -12,7 +12,7 @@ func (c *Call) CreateAnOrder(ctx context.Context, request model.CreateOrderReque
 	response := &model.Order{}
 
 	path := "/orders"
-	err := c.makeRequest(ctx, http.MethodPost, path, request, response)
+	err := c.makeRequest(ctx, http.MethodPost, path, request, nil, response)
 	if err != nil {
 		return nil, err
 	}

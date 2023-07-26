@@ -26,8 +26,13 @@ func main() {
 	_ = api.Auth("", "")
 
 	//products, _ := api.ListAllProducts(context.Background(), model.SearchProductsRequest{
-	//	Page:    1,
-	//	PerPage: 10,
+	//	PaginationRequest: model.PaginationRequest{
+	//		Page:    1,
+	//		PerPage: 15,
+	//Offset:  0,
+	//Order:   "",
+	//OrderBy: "",
+	//},
 	//Order:          "",
 	//OrderBy:        "",
 	//Context:        "",
@@ -59,8 +64,32 @@ func main() {
 	//})
 	//fmt.Println("this is the length of the products ---> ", len(products))
 
-	//product, _ := api.RetrieveAProduct(context.Background(), "13")
+	//product, _ := api.RetrieveAProduct(context.Background(), "38")
 	//fmt.Println("product is --->", product)
+	//
+	//productVariations, _ := api.RetrieveProductVariations(context.Background(), "38", model.SearchProductVariationsRequest{
+	//	PaginationRequest: model.PaginationRequest{
+	//		Page:    1,
+	//		PerPage: 100,
+	//		Offset:  0,
+	//		Order:   "",
+	//		OrderBy: "",
+	//	},
+	//})
+	//fmt.Println("product variations are --->", productVariations)
+
+	//attributes: [
+	//	{
+	//		id: 1,
+	//		name: "Color"
+	//		option: "Blue"
+	//	},
+	//	{
+	//		id: 2,
+	//		name: "Size"
+	//		option: "42"
+	//	}
+	//]
 
 	//tags, _ := api.ListAllProductTags(context.Background(), model.SearchTagsRequest{
 	//	PaginationRequest: model.PaginationRequest{
