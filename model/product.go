@@ -161,12 +161,12 @@ type (
 			Width  string `json:"width"`
 			Height string `json:"height"`
 		} `json:"dimensions"`
-		ShippingClass   string             `json:"shipping_class"`
-		ShippingClassID int                `json:"shipping_class_id"`
-		Image           Image              `json:"image"`
-		Attributes      []ProductAttribute `json:"attributes"`
-		MenuOrder       int                `json:"menu_order"`
-		MetaData        []interface{}      `json:"meta_data"`
+		ShippingClass   string               `json:"shipping_class"`
+		ShippingClassID int                  `json:"shipping_class_id"`
+		Image           Image                `json:"image"`
+		Attributes      []VariationAttribute `json:"attributes"`
+		MenuOrder       int                  `json:"menu_order"`
+		MetaData        []interface{}        `json:"meta_data"`
 		Links           struct {
 			Self []struct {
 				Href string `json:"href"`
@@ -238,6 +238,13 @@ type (
 		Visible   bool     `mapstructure:"visible" json:"visible"`
 		Variation bool     `mapstructure:"variation" json:"variation"`
 		Options   []string `mapstructure:"attributes" json:"options"`
+	}
+
+	// VariationAttribute schema
+	VariationAttribute struct {
+		ID     int    `mapstructure:"id" json:"id"`
+		Name   string `mapstructure:"name" json:"name"`
+		Option string `mapstructure:"option" json:"option"`
 	}
 
 	// SearchProductVariationsRequest schema to search for product variations
