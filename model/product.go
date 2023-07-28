@@ -237,7 +237,7 @@ type (
 		Position  int      `mapstructure:"position" json:"position"`
 		Visible   bool     `mapstructure:"visible" json:"visible"`
 		Variation bool     `mapstructure:"variation" json:"variation"`
-		Options   []string `mapstructure:"attributes" json:"options"`
+		Options   []string `mapstructure:"options" json:"options"`
 	}
 
 	// VariationAttribute schema
