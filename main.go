@@ -78,6 +78,9 @@ func main() {
 	//})
 	//fmt.Println("product variations are --->", productVariations)
 
+	//productVariation, _ := api.RetrieveAProductVariation(context.Background(), "38", "39")
+	//fmt.Println("product variations are --->", productVariation)
+
 	//attributes: [
 	//	{
 	//		id: 1,

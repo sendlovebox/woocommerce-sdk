@@ -23,6 +23,7 @@ type RemoteCalls interface {
 	ListAllProductTags(ctx context.Context, request model.SearchTagsRequest) ([]*model.ProductTag, error)
 
 	RetrieveProductVariations(ctx context.Context, productID string, request model.SearchProductVariationsRequest) ([]model.ProductVariation, error)
+	RetrieveAProductVariation(ctx context.Context, productID, variationID string) (model.ProductVariation, error)
 
 	ListAllCategories(ctx context.Context, request model.SearchCategoriesRequest) ([]*model.Category, error)
 	RetrieveACategory(ctx context.Context, id string) (model.Category, error)
