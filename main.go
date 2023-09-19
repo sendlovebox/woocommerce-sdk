@@ -198,15 +198,32 @@ func main() {
 	//		},
 	//	},
 	//})
-	//
+
 	//fmt.Println("order is --->", order)
 
-	//order, _ := api.UpdateAnOrder(context.Background(), 85, model.UpdateOrderRequest{
+	//order, _ := api.UpdateAnOrder(context.Background(), 490, model.UpdateOrderRequest{
 	//	//Status:        "",
 	//	//CustomerID:    0,
 	//	CustomerNote:  "oriyomifx has money die",
-	//	TransactionID: "some-random-id-here",
-	//	SetPaid:       true,
+	//	TransactionID: "another-random-id-here",
+	//	SetPaid:       false,
+	//	ShippingLines: []model.ShippingLineRequest{
+	//		{
+	//			MethodID:    "flat_rate",
+	//			MethodTitle: "Flat Rate",
+	//			Total:       "109.00",
+	//		},
+	//	},
+	//	FeeLines: []model.FeeLineRequest{
+	//		{
+	//			Name:  "service charge",
+	//			Total: "100.30",
+	//		},
+	//		{
+	//			Name:  "VAT",
+	//			Total: "10.30",
+	//		},
+	//	},
 	//})
 	//fmt.Println("order is --->", order)
 
