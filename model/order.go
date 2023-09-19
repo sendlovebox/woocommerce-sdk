@@ -68,11 +68,13 @@ type (
 
 	// UpdateOrderRequest request payload to update an existing order. Reference in https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#update-an-order
 	UpdateOrderRequest struct {
-		Status        string `json:"status,omitempty"`
-		CustomerID    int    `json:"customer_id,omitempty"`
-		CustomerNote  string `json:"customer_note,omitempty"`
-		TransactionID string `json:"transaction_id,omitempty"`
-		SetPaid       bool   `json:"set_paid,omitempty"`
+		Status        string                `json:"status,omitempty"`
+		CustomerID    int                   `json:"customer_id,omitempty"`
+		CustomerNote  string                `json:"customer_note,omitempty"`
+		TransactionID string                `json:"transaction_id,omitempty"`
+		SetPaid       bool                  `json:"set_paid,omitempty"`
+		ShippingLines []ShippingLineRequest `json:"shipping_lines,omitempty"`
+		FeeLines      []FeeLineRequest      `json:"fee_lines,omitempty"`
 	}
 
 	// FeeLineRequest struct
