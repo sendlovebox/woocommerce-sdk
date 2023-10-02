@@ -268,4 +268,50 @@ type (
 		StockStatus   string   `url:"stock_status,omitempty" json:"stock_status"`
 		Slug          string   `url:"slug,omitempty" json:"slug"`
 	}
+
+	// ReviewProductRequest schema to create a product review - https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#create-a-product-review
+	ReviewProductRequest struct {
+		ProductID     int    `json:"product_id,omitempty"`
+		Review        string `json:"review,omitempty"`
+		Reviewer      string `json:"reviewer,omitempty"`
+		ReviewerEmail string `json:"reviewer_email,omitempty"`
+		Rating        int    `json:"rating,omitempty"`
+	}
+
+	// ProductReview schema as seen in https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#product-review-properties
+	ProductReview struct {
+		ID                 int    `json:"id"`
+		DateCreated        string `json:"date_created"`
+		DateCreatedGmt     string `json:"date_created_gmt"`
+		ProductID          int    `json:"product_id"`
+		Status             string `json:"status"`
+		Reviewer           string `json:"reviewer"`
+		ReviewerEmail      string `json:"reviewer_email"`
+		Review             string `json:"review"`
+		Rating             int    `json:"rating"`
+		Verified           bool   `json:"verified"`
+		ReviewerAvatarUrls struct {
+			Field1 string `json:"24"`
+			Field2 string `json:"48"`
+			Field3 string `json:"96"`
+		} `json:"reviewer_avatar_urls"`
+		Links interface{} `json:"_links"`
+	}
+
+	// SearchProductReviewsRequest schema to search for product reviews - https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#list-all-product-reviews
+	SearchProductReviewsRequest struct {
+		PaginationRequest
+
+		Context         string   `url:"context,omitempty" json:"context"`
+		Search          string   `url:"search,omitempty" json:"search"`
+		After           string   `url:"after,omitempty" json:"after"`
+		Before          string   `url:"before,omitempty" json:"before"`
+		Exclude         []string `url:"exclude,omitempty" json:"exclude"`
+		Include         []string `url:"include,omitempty" json:"include"`
+		Status          Status   `url:"status,omitempty" json:"status"`
+		Reviewer        []string `url:"reviewer,omitempty" json:"reviewer"`
+		ReviewerExclude []string `url:"reviewer_exclude,omitempty" json:"reviewer_exclude"`
+		ReviewerEmail   []string `url:"reviewer_email,omitempty" json:"reviewer_email"`
+		Product         []string `url:"product,omitempty" json:"product"`
+	}
 )

@@ -228,4 +228,49 @@ func main() {
 	//_, _ = api.DeleteAnOrder(context.Background(), 85)
 
 	//_, _ = api.RetrieveAnOrder(context.Background(), 85)
+
+	//review, err := api.ReviewProduct(context.Background(), model.ReviewProductRequest{
+	//	ProductID:     38,
+	//	Review:        "This thing no bad at all o.",
+	//	Reviewer:      "Ninja",
+	//	ReviewerEmail: "ninja@lovebox.africa",
+	//	Rating:        5,
+	//})
+	//if err != nil {
+	//	fmt.Println("review --->", review)
+	//}
+
+	//review, err := api.UpdateProductReview(context.Background(), "121", model.ReviewProductRequest{
+	//	Review:        "This thing no bad at all o. Mafooooo",
+	//	Reviewer:      "Ninja",
+	//	ReviewerEmail: "ninja@lovebox.africa",
+	//	Rating:        4,
+	//})
+	//if err != nil {
+	//	fmt.Println("review --->", review)
+	//}
+
+	//reviews, err := api.ListProductReviews(context.Background(), model.SearchProductReviewsRequest{
+	//	PaginationRequest: model.PaginationRequest{
+	//		Page:    1,
+	//		PerPage: 15,
+	//		Offset:  0,
+	//		Order:   "",
+	//		OrderBy: "",
+	//	},
+	//	//Context:         "",
+	//	//Search:          "",
+	//	//After:           "",
+	//	//Before:          "",
+	//	//Exclude:         nil,
+	//	//Include:         nil,
+	//	//Status:          "",
+	//	//Reviewer:        nil,
+	//	//ReviewerExclude: nil,
+	//	//ReviewerEmail:   nil,
+	//	//Product:         nil,
+	//})
+	//if err != nil {
+	//	fmt.Println("reviews --->", reviews)
+	//}
 }
