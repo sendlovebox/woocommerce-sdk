@@ -143,3 +143,15 @@ func (c *Call) ListProductReviews(ctx context.Context, request model.SearchProdu
 
 	return *response, nil
 }
+
+func (c *Call) GetAProductReview(ctx context.Context, reviewID string) (*model.ProductReview, error) {
+	response := &model.ProductReview{}
+
+	path := fmt.Sprintf("/products/reviews/%s", reviewID)
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}

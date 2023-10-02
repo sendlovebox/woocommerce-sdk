@@ -25,8 +25,9 @@ type RemoteCalls interface {
 	RetrieveProductVariations(ctx context.Context, productID string, request model.SearchProductVariationsRequest) ([]model.ProductVariation, error)
 	RetrieveAProductVariation(ctx context.Context, productID, variationID string) (model.ProductVariation, error)
 	ReviewProduct(ctx context.Context, request model.ReviewProductRequest) (*model.ProductReview, error)
-	UpdateProductReview(ctx context.Context, id string, request model.ReviewProductRequest) (*model.ProductReview, error)
+	UpdateProductReview(ctx context.Context, reviewID string, request model.ReviewProductRequest) (*model.ProductReview, error)
 	ListProductReviews(ctx context.Context, request model.SearchProductReviewsRequest) ([]model.ProductReview, error)
+	GetAProductReview(ctx context.Context, reviewID string) (*model.ProductReview, error)
 
 	ListAllCategories(ctx context.Context, request model.SearchCategoriesRequest) ([]*model.Category, error)
 	RetrieveACategory(ctx context.Context, id string) (model.Category, error)
