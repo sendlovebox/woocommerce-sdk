@@ -144,6 +144,7 @@ func (c *Call) ListProductReviews(ctx context.Context, request model.SearchProdu
 	return *response, nil
 }
 
+// GetAProductReview retrieve a single product review by ID. https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#create-a-product-review
 func (c *Call) GetAProductReview(ctx context.Context, reviewID string) (*model.ProductReview, error) {
 	response := &model.ProductReview{}
 
