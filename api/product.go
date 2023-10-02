@@ -105,3 +105,54 @@ func (c *Call) ListAllProductTags(ctx context.Context, request model.SearchTagsR
 
 	return tags, nil
 }
+
+// ReviewProduct helps you to create a new product review. https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#create-a-product-review
+func (c *Call) ReviewProduct(ctx context.Context, request model.ReviewProductRequest) (*model.ProductReview, error) {
+	response := &model.ProductReview{}
+
+	err := c.makeRequest(ctx, http.MethodPost, "/products/reviews", request, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// UpdateProductReview helps you to update an existing product review. https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#update-a-product-review
+func (c *Call) UpdateProductReview(ctx context.Context, id string, request model.ReviewProductRequest) (*model.ProductReview, error) {
+	response := &model.ProductReview{}
+
+	path := fmt.Sprintf("/products/reviews/%s", id)
+
+	err := c.makeRequest(ctx, http.MethodPut, path, request, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// ListProductReviews retrieves all product reviews. https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#list-all-product-reviews
+func (c *Call) ListProductReviews(ctx context.Context, request model.SearchProductReviewsRequest) ([]model.ProductReview, error) {
+	response := &[]model.ProductReview{}
+
+	err := c.makeRequest(ctx, http.MethodGet, "/products/reviews", nil, request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return *response, nil
+}
+
+// GetAProductReview retrieve a single product review by ID. https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#create-a-product-review
+func (c *Call) GetAProductReview(ctx context.Context, reviewID string) (*model.ProductReview, error) {
+	response := &model.ProductReview{}
+
+	path := fmt.Sprintf("/products/reviews/%s", reviewID)
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
