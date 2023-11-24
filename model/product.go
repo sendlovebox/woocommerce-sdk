@@ -227,7 +227,7 @@ type (
 		PerPage int       `url:"per_page,omitempty" json:"per_page,omitempty"`
 		Offset  int       `url:"offset,omitempty" json:"offset,omitempty"`
 		Order   OrderType `url:"order,omitempty" json:"order,omitempty"`
-		OrderBy OrderBy   `url:"order_by,omitempty" json:"order_by,omitempty"`
+		OrderBy OrderBy   `url:"orderby,omitempty" json:"orderby,omitempty"`
 	}
 
 	// ProductAttribute schema
