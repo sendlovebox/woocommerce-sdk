@@ -111,7 +111,7 @@ type (
 		Variations        []int              `mapstructure:"variations" json:"variations"`
 		GroupedProducts   []interface{}      `mapstructure:"grouped_products" json:"grouped_products"`
 		MenuOrder         int                `mapstructure:"menu_order" json:"menu_order"`
-		MetaData          []interface{}      `mapstructure:"meta_data" json:"meta_data"`
+		MetaData          []Metadata         `mapstructure:"meta_data" json:"meta_data"`
 		Links             struct {
 			Self []struct {
 				Href string `mapstructure:"href" json:"href"`
@@ -120,6 +120,13 @@ type (
 				Href string `mapstructure:"href" json:"href"`
 			} `mapstructure:"collection" json:"collection"`
 		} `mapstructure:"_links" json:"_links"`
+	}
+
+	// Metadata is the schema for the metadata
+	Metadata struct {
+		ID    int    `json:"id"`
+		Key   string `json:"key"`
+		Value string `json:"value"`
 	}
 
 	// ProductVariation schema
