@@ -41,7 +41,7 @@ type (
 		Permalink         string        `mapstructure:"permalink" json:"permalink"`
 		DateCreated       string        `mapstructure:"date_created" json:"date_created"`
 		DateCreatedGmt    string        `mapstructure:"date_created_gmt" json:"date_created_gmt"`
-		DateModified      string        `mapstructure:"date_modified" json:"date_modified"`
+		DateModified      string        `mapstructure:"date_created" json:"date_modified"`
 		DateModifiedGmt   string        `mapstructure:"date_modified_gmt" json:"date_modified_gmt"`
 		Type              string        `mapstructure:"type" json:"type"`
 		Status            string        `mapstructure:"status" json:"status"`
@@ -53,10 +53,10 @@ type (
 		Price             string        `mapstructure:"price" json:"price"`
 		RegularPrice      string        `mapstructure:"regular_price" json:"regular_price"`
 		SalePrice         string        `mapstructure:"sale_price" json:"sale_price"`
-		DateOnSaleFrom    interface{}   `mapstructure:"date_on_sale_from" json:"date_on_sale_from"`
-		DateOnSaleFromGmt interface{}   `mapstructure:"date_on_sale_from_gmt" json:"date_on_sale_from_gmt"`
-		DateOnSaleTo      interface{}   `mapstructure:"date_on_sale_to" json:"date_on_sale_to"`
-		DateOnSaleToGmt   interface{}   `mapstructure:"date_on_sale_to_gmt" json:"date_on_sale_to_gmt"`
+		DateOnSaleFrom    string        `mapstructure:"date_on_sale_from" json:"date_on_sale_from"`
+		DateOnSaleFromGmt string        `mapstructure:"date_on_sale_from_gmt" json:"date_on_sale_from_gmt"`
+		DateOnSaleTo      string        `mapstructure:"date_on_sale_to" json:"date_on_sale_to"`
+		DateOnSaleToGmt   string        `mapstructure:"date_on_sale_to_gmt" json:"date_on_sale_to_gmt"`
 		PriceHTML         string        `mapstructure:"price_html" json:"price_html"`
 		OnSale            bool          `mapstructure:"on_sale" json:"on_sale"`
 		Purchasable       bool          `mapstructure:"purchasable" json:"purchasable"`
@@ -76,13 +76,12 @@ type (
 		BackOrders        string        `mapstructure:"backorders" json:"backorders"`
 		BackordersAllowed bool          `mapstructure:"backorders_allowed" json:"backorders_allowed"`
 		BackOrdered       bool          `mapstructure:"backordered" json:"backordered"`
-		LowStockAmount    interface{}   `mapstructure:"low_stock_amount" json:"low_stock_amount"`
 		SoldIndividually  bool          `mapstructure:"sold_individually" json:"sold_individually"`
 		Weight            string        `mapstructure:"weight" json:"weight"`
 		Dimensions        struct {
-			Length string `mapstructure:"length" json:"length"`
-			Width  string `mapstructure:"width" json:"width"`
-			Height string `mapstructure:"height" json:"height"`
+			Length string `mapstructure:"" json:"length"`
+			Width  string `mapstructure:"" json:"width"`
+			Height string `mapstructure:"" json:"height"`
 		} `mapstructure:"dimensions" json:"dimensions"`
 		ShippingRequired bool   `mapstructure:"shipping_required" json:"shipping_required"`
 		ShippingTaxable  bool   `mapstructure:"shipping_taxable" json:"shipping_taxable"`
@@ -106,29 +105,28 @@ type (
 			Name string `mapstructure:"name" json:"name"`
 			Slug string `mapstructure:"slug" json:"slug"`
 		} `mapstructure:"tags" json:"tags"`
-		Images                []Image            `mapstructure:"images" json:"images"`
-		Attributes            []ProductAttribute `mapstructure:"attributes" json:"attributes"`
-		DefaultAttributes     []interface{}      `mapstructure:"default_attributes" json:"default_attributes"`
-		Variations            []int              `mapstructure:"variations" json:"variations"`
-		GroupedProducts       []interface{}      `mapstructure:"grouped_products" json:"grouped_products"`
-		MenuOrder             int                `mapstructure:"menu_order" json:"menu_order"`
-		MetaData              []ProductMetadata  `mapstructure:"meta_data,omitempty" json:"meta_data,omitempty"`
-		HasOptions            bool               `mapstructure:"has_options" json:"has_options"`
-		PostPassword          string             `mapstructure:"post_password" json:"post_password"`
-		GlobalUniqueId        *string            `mapstructure:"global_unique_id" json:"global_unique_id"`
-		YoastHead             *string            `mapstructure:"yoast_head" json:"yoast_head"`
-		YoastHeadJson         interface{}        `mapstructure:"yoast_head_json" json:"yoast_head_json"`
-		JetpackLikesEnabled   *bool              `mapstructure:"jetpack_likes_enabled" json:"jetpack_likes_enabled"`
-		JetpackSharingEnabled *bool              `mapstructure:"jetpack_sharing_enabled" json:"jetpack_sharing_enabled"`
-		Brands                []interface{}      `mapstructure:"brands" json:"brands"`
-		Links                 interface{}        `mapstructure:"_links" json:"_links"`
+		Images            []Image            `mapstructure:"images" json:"images"`
+		Attributes        []ProductAttribute `mapstructure:"attributes" json:"attributes"`
+		DefaultAttributes []interface{}      `mapstructure:"default_attributes" json:"default_attributes"`
+		Variations        []int              `mapstructure:"variations" json:"variations"`
+		GroupedProducts   []interface{}      `mapstructure:"grouped_products" json:"grouped_products"`
+		MenuOrder         int                `mapstructure:"menu_order" json:"menu_order"`
+		MetaData          []Metadata         `mapstructure:"meta_data" json:"meta_data"`
+		Links             struct {
+			Self []struct {
+				Href string `mapstructure:"href" json:"href"`
+			} `mapstructure:"self" json:"self"`
+			Collection []struct {
+				Href string `mapstructure:"href" json:"href"`
+			} `mapstructure:"collection" json:"collection"`
+		} `mapstructure:"_links" json:"_links"`
 	}
 
-	// ProductMetadata is the schema for the metadata
-	ProductMetadata struct {
-		ID    int         `mapstructure:"id" json:"id"`
-		Key   string      `mapstructure:"key" json:"key"`
-		Value interface{} `mapstructure:"value" json:"value"`
+	// Metadata is the schema for the metadata
+	Metadata struct {
+		ID    int    `json:"id"`
+		Key   string `json:"key"`
+		Value string `json:"value"`
 	}
 
 	// ProductVariation schema
@@ -144,10 +142,10 @@ type (
 		Price             string        `json:"price"`
 		RegularPrice      string        `json:"regular_price"`
 		SalePrice         string        `json:"sale_price"`
-		DateOnSaleFrom    interface{}   `json:"date_on_sale_from"`
-		DateOnSaleFromGmt interface{}   `json:"date_on_sale_from_gmt"`
-		DateOnSaleTo      interface{}   `json:"date_on_sale_to"`
-		DateOnSaleToGmt   interface{}   `json:"date_on_sale_to_gmt"`
+		DateOnSaleFrom    string        `json:"date_on_sale_from"`
+		DateOnSaleFromGmt string        `json:"date_on_sale_from_gmt"`
+		DateOnSaleTo      string        `json:"date_on_sale_to"`
+		DateOnSaleToGmt   string        `json:"date_on_sale_to_gmt"`
 		OnSale            bool          `json:"on_sale"`
 		Status            string        `json:"status"`
 		Purchasable       bool          `json:"purchasable"`
@@ -322,15 +320,5 @@ type (
 		ReviewerExclude []string `url:"reviewer_exclude,omitempty" json:"reviewer_exclude"`
 		ReviewerEmail   []string `url:"reviewer_email,omitempty" json:"reviewer_email"`
 		Product         []string `url:"product,omitempty" json:"product"`
-	}
-)
-
-var (
-	// AllowedProductMetadatas shows a list of all product metadata
-	AllowedProductMetadatas = []string{
-		"delivery_details",
-		"extra_details",
-		"min_days_to_delivery",
-		"customization_details",
 	}
 )
