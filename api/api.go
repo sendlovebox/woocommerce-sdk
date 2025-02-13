@@ -3,7 +3,6 @@ package api
 
 import (
 	"context"
-	"time"
 
 	"github.com/go-resty/resty/v2"
 	"github.com/rs/zerolog"
@@ -50,7 +49,7 @@ type Call struct {
 
 // New initialises the object Call
 func New(z *zerolog.Logger, c *resty.Client, baseURL string) RemoteCalls {
-	c.SetTimeout(15 * time.Second)
+	// c.SetTimeout(15 * time.Second)
 	call := &Call{
 		client:  c,
 		logger:  z.With().Str("sdk", "woocommerce").Logger(),
