@@ -13,15 +13,15 @@ import (
 )
 
 // ListAllProducts helps you to view all the products.
-func (c *Call) ListAllProducts(ctx context.Context, request model.SearchProductsRequest) ([]model.Product, error) {
+func (c *Call) ListAllProducts(ctx context.Context, request model.SearchProductsRequest) ([]model.Product, model.PageInfo, error) {
 	response := &[]model.Product{}
 
-	err := c.makeRequest(ctx, http.MethodGet, "/products", nil, request, response)
+	pageInfo, err := c.makePaginatedRequest(ctx, http.MethodGet, "/products", nil, request, response, request.PerPage, request.Page)
 	if err != nil {
-		return nil, err
+		return nil, model.PageInfo{}, err
 	}
 
-	return *response, nil
+	return *response, pageInfo, nil
 }
 
 // RetrieveAProduct helps you to view a single product by its id
