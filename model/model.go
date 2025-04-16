@@ -33,6 +33,15 @@ type (
 			Href string `json:"href"`
 		} `json:"collection"`
 	}
+
+	// PageInfo holds pagination response info
+	PageInfo struct {
+		Page            int   `json:"page"`
+		Size            int   `json:"size"`
+		HasNextPage     bool  `json:"hasNextPage"`
+		HasPreviousPage bool  `json:"hasPreviousPage"`
+		TotalCount      int64 `json:"totalCount"`
+	}
 )
 
 const (
