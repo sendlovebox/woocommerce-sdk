@@ -79,6 +79,36 @@ func (mr *MockRemoteCallsMockRecorder) CreateAnOrder(ctx, request interface{}) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateAnOrder", reflect.TypeOf((*MockRemoteCalls)(nil).CreateAnOrder), ctx, request)
 }
 
+// DeleteAnOrder mocks base method.
+func (m *MockRemoteCalls) DeleteAnOrder(ctx context.Context, orderID int, forceDelete bool) (*model.Order, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteAnOrder", ctx, orderID, forceDelete)
+	ret0, _ := ret[0].(*model.Order)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// DeleteAnOrder indicates an expected call of DeleteAnOrder.
+func (mr *MockRemoteCallsMockRecorder) DeleteAnOrder(ctx, orderID, forceDelete interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAnOrder", reflect.TypeOf((*MockRemoteCalls)(nil).DeleteAnOrder), ctx, orderID, forceDelete)
+}
+
+// GetAProductReview mocks base method.
+func (m *MockRemoteCalls) GetAProductReview(ctx context.Context, reviewID string) (*model.ProductReview, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetAProductReview", ctx, reviewID)
+	ret0, _ := ret[0].(*model.ProductReview)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetAProductReview indicates an expected call of GetAProductReview.
+func (mr *MockRemoteCallsMockRecorder) GetAProductReview(ctx, reviewID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetAProductReview", reflect.TypeOf((*MockRemoteCalls)(nil).GetAProductReview), ctx, reviewID)
+}
+
 // ListAllCategories mocks base method.
 func (m *MockRemoteCalls) ListAllCategories(ctx context.Context, request model.SearchCategoriesRequest) ([]*model.Category, error) {
 	m.ctrl.T.Helper()
@@ -110,18 +140,34 @@ func (mr *MockRemoteCallsMockRecorder) ListAllProductTags(ctx, request interface
 }
 
 // ListAllProducts mocks base method.
-func (m *MockRemoteCalls) ListAllProducts(ctx context.Context, request model.SearchProductsRequest) ([]*model.Product, error) {
+func (m *MockRemoteCalls) ListAllProducts(ctx context.Context, request model.SearchProductsRequest) ([]model.Product, model.PageInfo, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "ListAllProducts", ctx, request)
-	ret0, _ := ret[0].([]*model.Product)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret0, _ := ret[0].([]model.Product)
+	ret1, _ := ret[1].(model.PageInfo)
+	ret2, _ := ret[2].(error)
+	return ret0, ret1, ret2
 }
 
 // ListAllProducts indicates an expected call of ListAllProducts.
 func (mr *MockRemoteCallsMockRecorder) ListAllProducts(ctx, request interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllProducts", reflect.TypeOf((*MockRemoteCalls)(nil).ListAllProducts), ctx, request)
+}
+
+// ListProductReviews mocks base method.
+func (m *MockRemoteCalls) ListProductReviews(ctx context.Context, request model.SearchProductReviewsRequest) ([]model.ProductReview, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ListProductReviews", ctx, request)
+	ret0, _ := ret[0].([]model.ProductReview)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ListProductReviews indicates an expected call of ListProductReviews.
+func (mr *MockRemoteCallsMockRecorder) ListProductReviews(ctx, request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListProductReviews", reflect.TypeOf((*MockRemoteCalls)(nil).ListProductReviews), ctx, request)
 }
 
 // RetrieveACategory mocks base method.
@@ -154,6 +200,66 @@ func (mr *MockRemoteCallsMockRecorder) RetrieveAProduct(ctx, id interface{}) *go
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RetrieveAProduct", reflect.TypeOf((*MockRemoteCalls)(nil).RetrieveAProduct), ctx, id)
 }
 
+// RetrieveAProductVariation mocks base method.
+func (m *MockRemoteCalls) RetrieveAProductVariation(ctx context.Context, productID, variationID string) (model.ProductVariation, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RetrieveAProductVariation", ctx, productID, variationID)
+	ret0, _ := ret[0].(model.ProductVariation)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RetrieveAProductVariation indicates an expected call of RetrieveAProductVariation.
+func (mr *MockRemoteCallsMockRecorder) RetrieveAProductVariation(ctx, productID, variationID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RetrieveAProductVariation", reflect.TypeOf((*MockRemoteCalls)(nil).RetrieveAProductVariation), ctx, productID, variationID)
+}
+
+// RetrieveAnOrder mocks base method.
+func (m *MockRemoteCalls) RetrieveAnOrder(ctx context.Context, orderID int) (*model.Order, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RetrieveAnOrder", ctx, orderID)
+	ret0, _ := ret[0].(*model.Order)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RetrieveAnOrder indicates an expected call of RetrieveAnOrder.
+func (mr *MockRemoteCallsMockRecorder) RetrieveAnOrder(ctx, orderID interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RetrieveAnOrder", reflect.TypeOf((*MockRemoteCalls)(nil).RetrieveAnOrder), ctx, orderID)
+}
+
+// RetrieveProductVariations mocks base method.
+func (m *MockRemoteCalls) RetrieveProductVariations(ctx context.Context, productID string, request model.SearchProductVariationsRequest) ([]model.ProductVariation, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RetrieveProductVariations", ctx, productID, request)
+	ret0, _ := ret[0].([]model.ProductVariation)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// RetrieveProductVariations indicates an expected call of RetrieveProductVariations.
+func (mr *MockRemoteCallsMockRecorder) RetrieveProductVariations(ctx, productID, request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RetrieveProductVariations", reflect.TypeOf((*MockRemoteCalls)(nil).RetrieveProductVariations), ctx, productID, request)
+}
+
+// ReviewProduct mocks base method.
+func (m *MockRemoteCalls) ReviewProduct(ctx context.Context, request model.ReviewProductRequest) (*model.ProductReview, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ReviewProduct", ctx, request)
+	ret0, _ := ret[0].(*model.ProductReview)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// ReviewProduct indicates an expected call of ReviewProduct.
+func (mr *MockRemoteCallsMockRecorder) ReviewProduct(ctx, request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ReviewProduct", reflect.TypeOf((*MockRemoteCalls)(nil).ReviewProduct), ctx, request)
+}
+
 // RunInSandboxMode mocks base method.
 func (m *MockRemoteCalls) RunInSandboxMode() {
 	m.ctrl.T.Helper()
@@ -164,4 +270,34 @@ func (m *MockRemoteCalls) RunInSandboxMode() {
 func (mr *MockRemoteCallsMockRecorder) RunInSandboxMode() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RunInSandboxMode", reflect.TypeOf((*MockRemoteCalls)(nil).RunInSandboxMode))
+}
+
+// UpdateAnOrder mocks base method.
+func (m *MockRemoteCalls) UpdateAnOrder(ctx context.Context, orderID int, request model.UpdateOrderRequest) (*model.Order, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateAnOrder", ctx, orderID, request)
+	ret0, _ := ret[0].(*model.Order)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateAnOrder indicates an expected call of UpdateAnOrder.
+func (mr *MockRemoteCallsMockRecorder) UpdateAnOrder(ctx, orderID, request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateAnOrder", reflect.TypeOf((*MockRemoteCalls)(nil).UpdateAnOrder), ctx, orderID, request)
+}
+
+// UpdateProductReview mocks base method.
+func (m *MockRemoteCalls) UpdateProductReview(ctx context.Context, reviewID string, request model.ReviewProductRequest) (*model.ProductReview, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateProductReview", ctx, reviewID, request)
+	ret0, _ := ret[0].(*model.ProductReview)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateProductReview indicates an expected call of UpdateProductReview.
+func (mr *MockRemoteCallsMockRecorder) UpdateProductReview(ctx, reviewID, request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProductReview", reflect.TypeOf((*MockRemoteCalls)(nil).UpdateProductReview), ctx, reviewID, request)
 }
