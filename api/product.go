@@ -106,6 +106,33 @@ func (c *Call) ListAllProductTags(ctx context.Context, request model.SearchTagsR
 	return tags, nil
 }
 
+// CreateProduct helps to create a product. https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#create-a-product
+func (c *Call) CreateProduct(ctx context.Context, request model.ProductCreateRequest) (*model.Product, error) {
+	response := &model.Product{}
+
+	path := "/products"
+	err := c.makeRequest(ctx, http.MethodPost, path, request, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
+// UpdateProduct helps you to update an existing product. https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#update-a-product
+func (c *Call) UpdateProduct(ctx context.Context, id string, request model.ProductUpdateRequest) (*model.Product, error) {
+	response := &model.Product{}
+
+	path := fmt.Sprintf("/products/%s", id)
+
+	err := c.makeRequest(ctx, http.MethodPut, path, request, nil, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
+
 // ReviewProduct helps you to create a new product review. https://woocommerce.github.io/woocommerce-rest-api-docs/?javascript#create-a-product-review
 func (c *Call) ReviewProduct(ctx context.Context, request model.ReviewProductRequest) (*model.ProductReview, error) {
 	response := &model.ProductReview{}

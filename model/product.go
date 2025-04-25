@@ -321,4 +321,77 @@ type (
 		ReviewerEmail   []string `url:"reviewer_email,omitempty" json:"reviewer_email"`
 		Product         []string `url:"product,omitempty" json:"product"`
 	}
+
+	// ProductCreateRequest schema to create a product - https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#create-a-product
+	ProductCreateRequest struct {
+		Name             string `json:"name"`
+		Type             string `json:"type,omitempty"`
+		RegularPrice     string `json:"regular_price,omitempty"`
+		Description      string `json:"description,omitempty"`
+		ShortDescription string `json:"short_description,omitempty"`
+		Categories       []struct {
+			ID int `json:"id"`
+		} `json:"categories,omitempty"`
+		Images []struct {
+			ID  int    `json:"id,omitempty"`
+			Src string `json:"src,omitempty"`
+		} `json:"images,omitempty"`
+	}
+
+	// ProductUpdateRequest schema to update a product (removed all the readonly fields) https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#product-properties
+	ProductUpdateRequest struct {
+		Name              string `json:"name,omitempty"`
+		Slug              string `json:"slug,omitempty"`
+		Type              string `json:"type,omitempty"`
+		Status            string `json:"status,omitempty"`
+		Featured          bool   `json:"featured,omitempty"`
+		CatalogVisibility string `json:"catalog_visibility,omitempty"`
+		Description       string `json:"description,omitempty"`
+		ShortDescription  string `json:"short_description,omitempty"`
+		SKU               string `json:"sku,omitempty"`
+		RegularPrice      string `json:"regular_price,omitempty"`
+		SalePrice         string `json:"sale_price,omitempty"`
+		DateOnSaleFrom    string `json:"date_on_sale_from,omitempty"`
+		DateOnSaleFromGmt string `json:"date_on_sale_from_gmt,omitempty"`
+		DateOnSaleTo      string `json:"date_on_sale_to,omitempty"`
+		DateOnSaleToGmt   string `json:"date_on_sale_to_gmt,omitempty"`
+		Virtual           bool   `json:"virtual,omitempty"`
+		Downloadable      bool   `json:"downloadable,omitempty"`
+		Downloads         []any  `json:"downloads,omitempty"`
+		DownloadLimit     int    `json:"download_limit,omitempty"`
+		DownloadExpiry    int    `json:"download_expiry,omitempty"`
+		ExternalURL       string `json:"external_url,omitempty"`
+		ButtonText        string `json:"button_text,omitempty"`
+		TaxStatus         string `json:"tax_status,omitempty"`
+		TaxClass          string `json:"tax_class,omitempty"`
+		ManageStock       bool   `json:"manage_stock,omitempty"`
+		StockQuantity     any    `json:"stock_quantity,omitempty"`
+		StockStatus       string `json:"stock_status,omitempty"`
+		BackOrders        string `json:"backorders,omitempty"`
+		SoldIndividually  bool   `json:"sold_individually,omitempty"`
+		Weight            string `json:"weight,omitempty"`
+		Dimensions        *struct {
+			Length string `json:"length,omitempty"`
+			Width  string `json:"width,omitempty"`
+			Height string `json:"height,omitempty"`
+		} `json:"dimensions,omitempty"`
+		ShippingClass  string `json:"shipping_class,omitempty"`
+		ReviewsAllowed bool   `json:"reviews_allowed,omitempty"`
+		UpsellIDs      []int  `json:"upsell_ids,omitempty"`
+		CrossSellIDs   []int  `json:"cross_sell_ids,omitempty"`
+		ParentID       int    `json:"parent_id,omitempty"`
+		PurchaseNote   string `json:"purchase_note,omitempty"`
+		Categories     []struct {
+			ID int `json:"id"`
+		} `json:"categories,omitempty"`
+		Tags []struct {
+			ID int `json:"id"`
+		} `json:"tags,omitempty"`
+		Images            []Image            `json:"images,omitempty"`
+		Attributes        []ProductAttribute `json:"attributes,omitempty"`
+		DefaultAttributes []any              `json:"default_attributes,omitempty"`
+		GroupedProducts   []any              `json:"grouped_products,omitempty"`
+		MenuOrder         int                `json:"menu_order,omitempty"`
+		MetaData          []Metadata         `json:"meta_data,omitempty"`
+	}
 )
