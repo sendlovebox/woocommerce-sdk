@@ -7,7 +7,9 @@ import (
 	"net/http"
 
 	"github.com/google/go-querystring/query"
+
 	"github.com/mitchellh/mapstructure"
+
 	"github.com/sendlovebox/woocommerce-sdk/model"
 )
 
