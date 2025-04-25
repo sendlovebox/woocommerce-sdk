@@ -17,6 +17,8 @@ type RemoteCalls interface {
 	Auth(customerKey, customerSecret string) error
 	RunInSandboxMode()
 
+	CreateProduct(ctx context.Context, request model.ProductCreateRequest) (*model.Product, error)
+	UpdateProduct(ctx context.Context, id string, request model.ProductUpdateRequest) (*model.Product, error)
 	ListAllProducts(ctx context.Context, request model.SearchProductsRequest) ([]model.Product, model.PageInfo, error)
 	RetrieveAProduct(ctx context.Context, id string) (model.Product, error)
 	ListAllProductTags(ctx context.Context, request model.SearchTagsRequest) ([]*model.ProductTag, error)
