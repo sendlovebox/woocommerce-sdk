@@ -1,7 +1,9 @@
 package api
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
@@ -97,7 +99,6 @@ func (c *Call) makePaginatedRequest(ctx context.Context, method, path string, bo
 	var (
 		err         error
 		res         *resty.Response
-		successRes  interface{}
 		queryParams url.Values
 		errorRes    model.ErrorPayload
 		pageInfo    model.PageInfo
@@ -105,7 +106,6 @@ func (c *Call) makePaginatedRequest(ctx context.Context, method, path string, bo
 
 	client := c.client.R().
 		SetContext(ctx).
-		SetResult(&successRes).
 		SetError(&errorRes)
 
 	// set the query params if it is passed
@@ -152,8 +152,6 @@ func (c *Call) makePaginatedRequest(ctx context.Context, method, path string, bo
 		return pageInfo, err
 	}
 
-	log.Info().Interface(model.LogStrResponse, successRes).Msg("response")
-
 	totalCount, _ := strconv.Atoi(res.Header().Get("X-Wp-Total"))
 	totalPages, _ := strconv.Atoi(res.Header().Get("X-Wp-Totalpages"))
 	pageInfo = model.PageInfo{
@@ -163,7 +161,16 @@ func (c *Call) makePaginatedRequest(ctx context.Context, method, path string, bo
 		HasPreviousPage: pageNo > 1,
 		TotalCount:      int64(totalCount),
 	}
-	return pageInfo, mapstruct(successRes, expectedRes)
+	cleaned := removeBOM(res.Body())
+
+	// decode cleaned body into interface{}
+	var decoded interface{}
+	if err = json.Unmarshal(cleaned, &decoded); err != nil {
+		log.Err(err).Msg("failed to unmarshal cleaned body")
+		return pageInfo, err
+	}
+
+	return pageInfo, mapstruct(decoded, expectedRes)
 }
 
 func mapstruct(data interface{}, v interface{}) error {
@@ -178,4 +185,12 @@ func mapstruct(data interface{}, v interface{}) error {
 	}
 	err = decoder.Decode(data)
 	return err
+}
+
+func removeBOM(data []byte) []byte {
+	bom := []byte{0xEF, 0xBB, 0xBF}
+	if bytes.HasPrefix(data, bom) {
+		return data[len(bom):]
+	}
+	return data
 }

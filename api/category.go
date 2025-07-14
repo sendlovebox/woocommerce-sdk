@@ -2,27 +2,25 @@ package api
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
-	"net/http"
 
 	"github.com/google/go-querystring/query"
-
 	"github.com/mitchellh/mapstructure"
 
 	"github.com/sendlovebox/woocommerce-sdk/model"
 )
 
-// ListAllCategories helps you to view all the products.
+// ListAllCategories fetches all product categories
 func (c *Call) ListAllCategories(ctx context.Context, request model.SearchCategoriesRequest) ([]*model.Category, error) {
-	endpoint := fmt.Sprintf("%s%s", c.baseURL, "/products/categories")
+	endpoint := fmt.Sprintf("%s/products/categories", c.baseURL)
 	fL := c.logger.With().Str("func", "SearchCategories").Str(model.LogStrKeyEndpoint, endpoint).Logger()
 	fL.Info().Msg("starting...")
 	fL.Info().Interface(model.LogStrRequest, request).Msg("request")
 	defer fL.Info().Msg("done...")
 
 	var (
-		response   interface{}
 		categories []*model.Category
 		errorRes   model.ErrorPayload
 	)
@@ -34,58 +32,75 @@ func (c *Call) ListAllCategories(ctx context.Context, request model.SearchCatego
 	}
 
 	resp, err := c.client.R().
-		SetResult(&response).
-		SetError(errorRes).
+		SetError(&errorRes).
 		SetQueryParamsFromValues(queryParams).
 		SetContext(ctx).
 		Get(endpoint)
 
 	if err != nil {
-		return nil, errors.New(errorRes.Message)
-	} else if resp.StatusCode() != http.StatusOK {
-		fL.Info().Str("error_code", fmt.Sprintf("%d", resp.StatusCode())).Msg(string(resp.Body()))
-		return nil, model.ErrNetworkError
+		fL.Err(err).Msg("request error")
+		return nil, err
 	}
 
-	err = mapstructure.Decode(response, &categories)
-	if err != nil {
+	if errorRes.Message != "" {
+		fL.Err(err).Msg("api returned error")
+		return nil, errors.New(errorRes.Message)
+	}
+
+	body := removeBOM(resp.Body())
+
+	var decoded interface{}
+	if err = json.Unmarshal(body, &decoded); err != nil {
+		fL.Err(err).Msg("failed to unmarshal cleaned response body")
+		return nil, err
+	}
+
+	if err = mapstructure.Decode(decoded, &categories); err != nil {
 		fL.Err(err).Msg("unable to decode response for categories")
-		return categories, err
+		return nil, err
 	}
 
 	return categories, nil
 }
 
-// RetrieveACategory helps you to view a single category by its id
+// RetrieveACategory fetches a single category by its ID
 func (c *Call) RetrieveACategory(ctx context.Context, id string) (model.Category, error) {
-	endpoint := fmt.Sprintf("%s%s%s", c.baseURL, "/products/categories/", id)
+	endpoint := fmt.Sprintf("%s/products/categories/%s", c.baseURL, id)
 	fL := c.logger.With().Str("func", "RetrieveACategory").Str(model.LogStrKeyEndpoint, endpoint).Logger()
 	fL.Info().Msg("starting...")
-	fL.Info().Interface(model.LogStrRequest, id).Msg("request")
+	fL.Info().Str("category_id", id).Msg("request")
 	defer fL.Info().Msg("done...")
 
 	var (
-		response interface{}
 		category model.Category
 		errorRes model.ErrorPayload
 	)
 
 	resp, err := c.client.R().
-		SetResult(&response).
-		SetError(errorRes).
+		SetError(&errorRes).
 		SetContext(ctx).
 		Get(endpoint)
 
 	if err != nil {
-		return category, errors.New(errorRes.Message)
-	} else if resp.StatusCode() != http.StatusOK {
-		fL.Info().Str("error_code", fmt.Sprintf("%d", resp.StatusCode())).Msg(string(resp.Body()))
-		return category, model.ErrNetworkError
+		fL.Err(err).Msg("request error")
+		return category, err
 	}
 
-	err = mapstructure.Decode(response, &category)
-	if err != nil {
-		fL.Err(err).Msg("unable to decode response for product")
+	if errorRes.Message != "" {
+		fL.Err(err).Msg("api returned error")
+		return category, errors.New(errorRes.Message)
+	}
+
+	body := removeBOM(resp.Body())
+
+	var decoded interface{}
+	if err = json.Unmarshal(body, &decoded); err != nil {
+		fL.Err(err).Msg("failed to unmarshal cleaned response body")
+		return category, err
+	}
+
+	if err = mapstructure.Decode(decoded, &category); err != nil {
+		fL.Err(err).Msg("unable to decode response for category")
 		return category, err
 	}
 
