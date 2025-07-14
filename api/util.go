@@ -29,14 +29,12 @@ func (c *Call) makeRequest(ctx context.Context, method, path string, body, param
 	var (
 		err         error
 		res         *resty.Response
-		successRes  interface{}
 		queryParams url.Values
 		errorRes    model.ErrorPayload
 	)
 
 	client := c.client.R().
 		SetContext(ctx).
-		SetResult(&successRes).
 		SetError(&errorRes)
 
 	// set the query params if it is passed
@@ -46,7 +44,6 @@ func (c *Call) makeRequest(ctx context.Context, method, path string, body, param
 			log.Info().Msg("invalid query params")
 			return model.ErrInvalidParams
 		}
-
 		client.SetQueryParamsFromValues(queryParams)
 	}
 
@@ -76,16 +73,27 @@ func (c *Call) makeRequest(ctx context.Context, method, path string, body, param
 		return err
 	}
 
-	// check to ensure error is not empty
-	if errorRes != (model.ErrorPayload{}) {
-		err = errors.New(errorRes.Message)
-		log.Err(err).Msg("error while making request")
+	if errorRes.Message != "" {
+		log.Err(errors.New(errorRes.Message)).Msg("error returned from WooCommerce")
+		return errors.New(errorRes.Message)
+	}
+
+	// Handle and decode response manually
+	cleaned := removeBOM(res.Body())
+
+	var decoded interface{}
+	if err = json.Unmarshal(cleaned, &decoded); err != nil {
+		log.Err(err).Msg("failed to unmarshal cleaned response body")
 		return err
 	}
 
-	log.Info().Interface(model.LogStrResponse, successRes).Msg("response")
+	if err = mapstruct(decoded, expectedRes); err != nil {
+		log.Err(err).Msg("failed to mapstruct response")
+		return err
+	}
 
-	return mapstruct(successRes, expectedRes)
+	log.Info().Interface(model.LogStrResponse, expectedRes).Msg("response")
+	return nil
 }
 
 func (c *Call) makePaginatedRequest(ctx context.Context, method, path string, body, params, expectedRes interface{}, count, pageNo int) (model.PageInfo, error) {
