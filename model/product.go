@@ -41,7 +41,7 @@ type (
 		Permalink         string        `mapstructure:"permalink" json:"permalink"`
 		DateCreated       string        `mapstructure:"date_created" json:"date_created"`
 		DateCreatedGmt    string        `mapstructure:"date_created_gmt" json:"date_created_gmt"`
-		DateModified      string        `mapstructure:"date_created" json:"date_modified"`
+		DateModified      string        `mapstructure:"date_modified" json:"date_modified"`
 		DateModifiedGmt   string        `mapstructure:"date_modified_gmt" json:"date_modified_gmt"`
 		Type              string        `mapstructure:"type" json:"type"`
 		Status            string        `mapstructure:"status" json:"status"`
@@ -79,9 +79,9 @@ type (
 		SoldIndividually  bool          `mapstructure:"sold_individually" json:"sold_individually"`
 		Weight            string        `mapstructure:"weight" json:"weight"`
 		Dimensions        struct {
-			Length string `mapstructure:"" json:"length"`
-			Width  string `mapstructure:"" json:"width"`
-			Height string `mapstructure:"" json:"height"`
+			Length string `mapstructure:"length" json:"length"`
+			Width  string `mapstructure:"width" json:"width"`
+			Height string `mapstructure:"height" json:"height"`
 		} `mapstructure:"dimensions" json:"dimensions"`
 		ShippingRequired bool   `mapstructure:"shipping_required" json:"shipping_required"`
 		ShippingTaxable  bool   `mapstructure:"shipping_taxable" json:"shipping_taxable"`
@@ -124,9 +124,9 @@ type (
 
 	// Metadata is the schema for the metadata
 	Metadata struct {
-		ID    int         `json:"id"`
-		Key   string      `json:"key"`
-		Value interface{} `json:"value"`
+		ID    int         `mapstructure:"id" json:"id"`
+		Key   string      `mapstructure:"key" json:"key"`
+		Value interface{} `mapstructure:"value" json:"value"`
 	}
 
 	// ProductVariation schema
