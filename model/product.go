@@ -12,8 +12,10 @@ type (
 		ModifiedAfter  string      `url:"modified_after,omitempty" json:"modified_after"`
 		ModifiedBefore string      `url:"modified_before,omitempty" json:"modified_before"`
 		DateAreGmt     bool        `url:"date_are_gmt,omitempty" json:"date_are_gmt"`
-		Featured       bool        `url:"featured,omitempty" json:"featured"`
-		OnSale         bool        `url:"on_sale,omitempty" json:"on_sale"`
+		Featured       *bool       `url:"featured,omitempty" json:"featured"`
+		OnSale         *bool       `url:"on_sale,omitempty" json:"on_sale"`
+		Virtual        *bool       `url:"virtual,omitempty" json:"virtual"`
+		Downloadable   *bool       `url:"downloadable,omitempty" json:"downloadable"`
 		Exclude        []string    `url:"exclude,omitempty" json:"exclude"`
 		Include        []string    `url:"include,omitempty" json:"include"`
 		Parent         []string    `url:"parent,omitempty" json:"parent"`
