@@ -396,4 +396,27 @@ type (
 		MenuOrder         int                `json:"menu_order,omitempty"`
 		MetaData          []Metadata         `json:"meta_data,omitempty"`
 	}
+
+	// SearchProductAttributesRequest schema to search for product attributes - https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#list-all-product-attributes
+	SearchProductAttributesRequest struct {
+		Context string `url:"context,omitempty" json:"context"`
+	}
+
+	// ProductAttributeSearchResponse schema is the product attribute search response
+	ProductAttributeSearchResponse struct {
+		ID          int    `mapstructure:"id" json:"id"`
+		Name        string `mapstructure:"name" json:"name"`
+		Slug        string `mapstructure:"slug" json:"slug"`
+		Type        string `mapstructure:"type" json:"type"`
+		OrderBy     string `mapstructure:"order_by" json:"order_by"`
+		HasArchives bool   `mapstructure:"has_archives" json:"has_archives"`
+		Links       struct {
+			Self []struct {
+				Href string `mapstructure:"href" json:"href"`
+			} `mapstructure:"self" json:"self"`
+			Collection []struct {
+				Href string `mapstructure:"href" json:"href"`
+			} `mapstructure:"collection" json:"collection"`
+		} `mapstructure:"_links" json:"_links"`
+	}
 )

@@ -183,3 +183,15 @@ func (c *Call) GetAProductReview(ctx context.Context, reviewID string) (*model.P
 
 	return response, nil
 }
+
+// ListAllProductAttributes helps to retrieve all the product attributes
+func (c *Call) ListAllProductAttributes(ctx context.Context, request model.SearchProductAttributesRequest) ([]model.ProductAttributeSearchResponse, error) {
+	response := &[]model.ProductAttributeSearchResponse{}
+
+	err := c.makeRequest(ctx, http.MethodGet, "/products/attributes", nil, request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return *response, nil
+}
