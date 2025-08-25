@@ -449,4 +449,9 @@ type (
 			} `mapstructure:"collection" json:"collection"`
 		} `mapstructure:"_links" json:"_links"`
 	}
+
+	// ProductAttributeTermCreateRequest schema to create a product attribute term
+	ProductAttributeTermCreateRequest struct {
+		Name string `url:"name" json:"name"`
+	}
 )

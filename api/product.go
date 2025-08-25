@@ -208,3 +208,16 @@ func (c *Call) ListAllProductAttributeTerms(ctx context.Context, attributeID int
 
 	return *response, nil
 }
+
+// CreateProductAttributeTerm helps to create a product attribute term. https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#list-all-attribute-terms
+func (c *Call) CreateProductAttributeTerm(ctx context.Context, attributeID int, request model.ProductAttributeTermCreateRequest) (*model.ProductAttributeTermSearchResponse, error) {
+	response := &model.ProductAttributeTermSearchResponse{}
+
+	path := fmt.Sprintf("/products/attributes/%d/terms", attributeID)
+	err := c.makeRequest(ctx, http.MethodPost, path, nil, request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return response, nil
+}
