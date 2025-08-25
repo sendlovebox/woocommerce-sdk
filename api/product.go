@@ -185,8 +185,8 @@ func (c *Call) GetAProductReview(ctx context.Context, reviewID string) (*model.P
 }
 
 // ListAllProductAttributes helps to retrieve all the product attributes
-func (c *Call) ListAllProductAttributes(ctx context.Context, request model.SearchProductAttributesRequest) ([]model.ProductAttributeSearchResponse, error) {
-	response := &[]model.ProductAttributeSearchResponse{}
+func (c *Call) ListAllProductAttributes(ctx context.Context, request model.SearchProductAttributesRequest) ([]model.ProductAttributeResponse, error) {
+	response := &[]model.ProductAttributeResponse{}
 
 	err := c.makeRequest(ctx, http.MethodGet, "/products/attributes", nil, request, response)
 	if err != nil {
@@ -197,8 +197,8 @@ func (c *Call) ListAllProductAttributes(ctx context.Context, request model.Searc
 }
 
 // ListAllProductAttributeTerms helps to retrieve all the product attributes terms. https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#list-all-attribute-terms
-func (c *Call) ListAllProductAttributeTerms(ctx context.Context, attributeID int, request model.SearchProductAttributeTermRequest) ([]model.ProductAttributeTermSearchResponse, error) {
-	response := &[]model.ProductAttributeTermSearchResponse{}
+func (c *Call) ListAllProductAttributeTerms(ctx context.Context, attributeID int, request model.SearchProductAttributeTermRequest) ([]model.ProductAttributeTerm, error) {
+	response := &[]model.ProductAttributeTerm{}
 
 	path := fmt.Sprintf("/products/attributes/%d/terms", attributeID)
 	err := c.makeRequest(ctx, http.MethodGet, path, nil, request, response)
@@ -210,8 +210,8 @@ func (c *Call) ListAllProductAttributeTerms(ctx context.Context, attributeID int
 }
 
 // CreateProductAttributeTerm helps to create a product attribute term. https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#list-all-attribute-terms
-func (c *Call) CreateProductAttributeTerm(ctx context.Context, attributeID int, request model.ProductAttributeTermCreateRequest) (*model.ProductAttributeTermSearchResponse, error) {
-	response := &model.ProductAttributeTermSearchResponse{}
+func (c *Call) CreateProductAttributeTerm(ctx context.Context, attributeID int, request model.ProductAttributeTermCreateRequest) (*model.ProductAttributeTerm, error) {
+	response := &model.ProductAttributeTerm{}
 
 	path := fmt.Sprintf("/products/attributes/%d/terms", attributeID)
 	err := c.makeRequest(ctx, http.MethodPost, path, nil, request, response)

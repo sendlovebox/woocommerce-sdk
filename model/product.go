@@ -402,8 +402,8 @@ type (
 		Context string `url:"context,omitempty" json:"context"`
 	}
 
-	// ProductAttributeSearchResponse schema is the product attribute search response
-	ProductAttributeSearchResponse struct {
+	// ProductAttributeResponse schema is the product attribute response
+	ProductAttributeResponse struct {
 		ID          int    `mapstructure:"id" json:"id"`
 		Name        string `mapstructure:"name" json:"name"`
 		Slug        string `mapstructure:"slug" json:"slug"`
@@ -432,8 +432,8 @@ type (
 		Slug      string   `url:"slug,omitempty" json:"slug"`
 	}
 
-	// ProductAttributeTermSearchResponse schema is the product attribute term search response
-	ProductAttributeTermSearchResponse struct {
+	// ProductAttributeTerm schema is the product attribute term
+	ProductAttributeTerm struct {
 		ID          int    `mapstructure:"id" json:"id"`
 		Name        string `mapstructure:"name" json:"name"`
 		Slug        string `mapstructure:"slug" json:"slug"`
