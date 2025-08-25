@@ -195,3 +195,16 @@ func (c *Call) ListAllProductAttributes(ctx context.Context, request model.Searc
 
 	return *response, nil
 }
+
+// ListAllProductAttributeTerms helps to retrieve all the product attributes terms. https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#list-all-attribute-terms
+func (c *Call) ListAllProductAttributeTerms(ctx context.Context, attributeID int, request model.SearchProductAttributeTermRequest) ([]model.ProductAttributeTermSearchResponse, error) {
+	response := &[]model.ProductAttributeTermSearchResponse{}
+
+	path := fmt.Sprintf("/products/attributes/%d/terms", attributeID)
+	err := c.makeRequest(ctx, http.MethodGet, path, nil, request, response)
+	if err != nil {
+		return nil, err
+	}
+
+	return *response, nil
+}
