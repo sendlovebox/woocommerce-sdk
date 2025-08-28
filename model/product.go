@@ -396,4 +396,62 @@ type (
 		MenuOrder         int                `json:"menu_order,omitempty"`
 		MetaData          []Metadata         `json:"meta_data,omitempty"`
 	}
+
+	// SearchProductAttributesRequest schema to search for product attributes - https://woocommerce.github.io/woocommerce-rest-api-docs/?shell#list-all-product-attributes
+	SearchProductAttributesRequest struct {
+		Context string `url:"context,omitempty" json:"context"`
+	}
+
+	// ProductAttributeResponse schema is the product attribute response
+	ProductAttributeResponse struct {
+		ID          int    `mapstructure:"id" json:"id"`
+		Name        string `mapstructure:"name" json:"name"`
+		Slug        string `mapstructure:"slug" json:"slug"`
+		Type        string `mapstructure:"type" json:"type"`
+		OrderBy     string `mapstructure:"order_by" json:"order_by"`
+		HasArchives bool   `mapstructure:"has_archives" json:"has_archives"`
+		Links       struct {
+			Self []struct {
+				Href string `mapstructure:"href" json:"href"`
+			} `mapstructure:"self" json:"self"`
+			Collection []struct {
+				Href string `mapstructure:"href" json:"href"`
+			} `mapstructure:"collection" json:"collection"`
+		} `mapstructure:"_links" json:"_links"`
+	}
+
+	// SearchProductAttributeTermRequest schema for request to search for product attribute term
+	SearchProductAttributeTermRequest struct {
+		PaginationRequest
+		Context   string   `url:"context,omitempty" json:"context"`
+		Search    string   `url:"search,omitempty" json:"search"`
+		Exclude   []string `url:"exclude,omitempty" json:"exclude"`
+		Include   []string `url:"include,omitempty" json:"include"`
+		HideEmpty bool     `url:"hide_empty,omitempty" json:"hide_empty"`
+		Product   int      `url:"product,omitempty" json:"product"`
+		Slug      string   `url:"slug,omitempty" json:"slug"`
+	}
+
+	// ProductAttributeTerm schema is the product attribute term
+	ProductAttributeTerm struct {
+		ID          int    `mapstructure:"id" json:"id"`
+		Name        string `mapstructure:"name" json:"name"`
+		Slug        string `mapstructure:"slug" json:"slug"`
+		Description string `mapstructure:"description" json:"description"`
+		MenuOrder   int    `mapstructure:"menu_order" json:"menu_order"`
+		Count       int    `mapstructure:"count" json:"count"`
+		Links       struct {
+			Self []struct {
+				Href string `mapstructure:"href" json:"href"`
+			} `mapstructure:"self" json:"self"`
+			Collection []struct {
+				Href string `mapstructure:"href" json:"href"`
+			} `mapstructure:"collection" json:"collection"`
+		} `mapstructure:"_links" json:"_links"`
+	}
+
+	// ProductAttributeTermCreateRequest schema to create a product attribute term
+	ProductAttributeTermCreateRequest struct {
+		Name string `url:"name" json:"name"`
+	}
 )
