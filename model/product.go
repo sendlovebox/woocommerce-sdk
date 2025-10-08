@@ -386,9 +386,7 @@ type (
 		Categories     []struct {
 			ID int `json:"id"`
 		} `json:"categories,omitempty"`
-		Tags []struct {
-			ID int `json:"id"`
-		} `json:"tags,omitempty"`
+		Tags              []ProductTag       `json:"tags,omitempty"`
 		Images            []Image            `json:"images,omitempty"`
 		Attributes        []ProductAttribute `json:"attributes,omitempty"`
 		DefaultAttributes []any              `json:"default_attributes,omitempty"`
