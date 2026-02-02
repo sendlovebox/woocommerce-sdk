@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 
 	"github.com/go-resty/resty/v2"
 	"github.com/google/go-querystring/query"
@@ -80,6 +81,21 @@ func (c *Call) makeRequest(ctx context.Context, method, path string, body, param
 
 	// Handle and decode response manually
 	cleaned := removeBOM(res.Body())
+	contentType := res.Header().Get("Content-Type")
+
+	if !strings.Contains(strings.ToLower(contentType), "application/json") || looksLikeHTML(cleaned) {
+		trimmed := bytes.TrimSpace(cleaned)
+		snippetLen := min(len(trimmed), 500) // limit log output
+
+		log.Error().
+			Int("status", res.StatusCode()).
+			Str("content_type", contentType).
+			Str("snippet", string(trimmed[:snippetLen])).
+			Int("body_len", len(trimmed)).
+			Msg("non json response")
+
+		return model.ErrUpstreamHTML
+	}
 
 	var decoded interface{}
 	if err = json.Unmarshal(cleaned, &decoded); err != nil {
@@ -201,4 +217,9 @@ func removeBOM(data []byte) []byte {
 		return data[len(bom):]
 	}
 	return data
+}
+
+func looksLikeHTML(b []byte) bool {
+	b = bytes.TrimSpace(b)
+	return len(b) > 0 && b[0] == '<'
 }
